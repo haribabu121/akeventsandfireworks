@@ -1,0 +1,70 @@
+import React from 'react';
+import { FaMapMarkerAlt } from 'react-icons/fa';
+
+const Events = () => {
+  const events = [
+    {
+      id: 1,
+      title: 'New Year Celebration',
+      date: 'Dec 31, 2025',
+      location: 'public grounds',
+      image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+    },
+    {
+      id: 2,
+      title: 'sankranthi Festival',
+      date: 'Nov 12, 2023',
+      location: 'Godavari River Bank',
+      image: 'https://images.unsplash.com/photo-1603403637115-4741e9e7a4f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+    },
+    {
+      id: 3,
+      title: 'Wedding Fireworks',
+      date: 'Custom Date',
+      location: 'Vijayawada',
+      image: 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+    }
+  ];
+
+  return (
+    <section id="events" className="py-20 bg-white">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Upcoming Events</h2>
+          <div className="w-24 h-1 bg-yellow-500 mx-auto"></div>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {events.map((event) => (
+            <div key={event.id} className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={event.image} 
+                  alt={event.title}
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-4 text-white">
+                  <span className="bg-yellow-500 text-black px-3 py-1 text-sm font-semibold rounded-full">
+                    {event.date}
+                  </span>
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
+                <div className="flex items-center text-gray-600 mb-4">
+                  <FaMapMarkerAlt className="mr-2 text-red-500" />
+                  <span>{event.location}</span>
+                </div>
+                <button className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-colors">
+                  Learn More
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Events;
