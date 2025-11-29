@@ -10,6 +10,7 @@ import Contact from './components/contact/Contact';
 import Footer from './components/footer/Footer';
 import ExecutiveTeam from './components/Executive Team/ExecutiveTeam';
 import FAQSection from './components/FAQ SECTION/Faq';
+import ContactForm from './components/contact/ContactForm';
 
 function App() {
   return (
@@ -32,7 +33,12 @@ function App() {
                 <Footer />
               </div>
             } />
-            {/* Add more routes here as needed */}
+            <Route path="/contact" element={
+              <div className="bg-gray-50">
+                <ContactForm />
+                <Footer />
+              </div>
+            } />
           </Routes>
         </main>
       </div>

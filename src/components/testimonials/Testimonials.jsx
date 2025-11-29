@@ -42,6 +42,37 @@ const Testimonials = () => {
     }
   ];
 
+  // Custom arrow components
+  const NextArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={`${className} !right-0 !mr-8 z-10`}
+        style={{ ...style, display: 'block', background: 'rgba(0,0,0,0.7)', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        onClick={onClick}
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute">
+          <path d="M9 18L15 12L9 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </div>
+    );
+  };
+
+  const PrevArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={`${className} !left-0 !ml-8 z-10`}
+        style={{ ...style, display: 'block', background: 'rgba(0,0,0,0.7)', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        onClick={onClick}
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute">
+          <path d="M15 18L9 12L15 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </div>
+    );
+  };
+
   // Slick settings
   const settings = {
     dots: true,
@@ -49,8 +80,10 @@ const Testimonials = () => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     autoplay: true,
-    autoplaySpeed: 3000, // 5 seconds
+    autoplaySpeed: 5000, // 5 seconds
     pauseOnHover: true,
     responsive: [
       {

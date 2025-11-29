@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams, Link } from "react-router-dom";
 import {
   FaHome,
   FaBoxOpen,
@@ -39,7 +39,7 @@ import {
 } from "react-icons/fa";
 import { GiSparkles, GiFlowers } from "react-icons/gi";
 
-import Logo from './Logo.jpg';
+import Logo from './Logo.png';
 
 const Navbar = () => {
   const [showProducts, setShowProducts] = useState(false);
@@ -195,7 +195,7 @@ const Navbar = () => {
       <nav className="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm border-b border-gray-200 px-10 py-2">
         <div className="max-w-7xl mx-auto flex justify-between">
           <div className="cursor-pointer mr-2">
-            <img src={Logo} alt="Logo" className="w-12 h-12 hover:scale-105 transition" />
+            <img src={Logo} alt="Logo" className="w-30  h-18 hover:scale-105 transition" />
           </div>
 
           {/* Hamburger */}
@@ -209,9 +209,12 @@ const Navbar = () => {
           >
 
           {/* Home */}
-          <li className="flex items-center gap-2 hover:text-green-600 cursor-pointer">
+          <Link 
+            to="/" 
+            className={`flex items-center gap-2 cursor-pointer ${location.pathname === '/' ? 'text-green-600' : 'hover:text-green-600'}`}
+          >
             <FaHome /> Home
-          </li>
+          </Link>
 
           {/* About Us */}
           <li
@@ -354,9 +357,9 @@ const Navbar = () => {
           </li> */}
 
           {/* Contact */}
-          <li className="flex items-center gap-2 hover:text-green-600 cursor-pointer">
+          <Link to="/contact" className="flex items-center gap-2 hover:text-green-600 cursor-pointer">
             <FaPhoneAlt /> Contact Us
-          </li>
+          </Link>
 
           {/* Case Studies */}
           {/* <li className="flex items-center gap-2 hover:text-green-600 cursor-pointer">

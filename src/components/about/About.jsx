@@ -42,7 +42,7 @@ const About = () => {
           <div className="md:w-1/2">
             <div className="relative rounded-lg overflow-hidden shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
+                src="https://magarticles.magzter.com/articles/9339/378545/5dafe628542f8/Fireworks-Events.jpg" 
                 alt="Fireworks display" 
                 className="w-full h-auto rounded-lg"
               />
