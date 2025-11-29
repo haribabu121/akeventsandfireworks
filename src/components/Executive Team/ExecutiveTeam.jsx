@@ -4,31 +4,31 @@ import dpImage from "./dp.jpg";
 const teamMembers = [
   {
     name: "Ankam Durga ",
-    title: "Founder & Chairman",
+    title: "Founder & Managing Director",
     image: dpImage,
     linkedin: "#",
   },
   {
     name: "Ankam Haribabu",
-    title: "Director & CEO",
+    title: "Operations Director",
     image: "https://img.freepik.com/premium-vector/beautiful-professional-man-character-vector-illustration_1287271-88114.jpg?w=2000",
     linkedin: "#",
   },
   {
     name: "Konapala Devi",
-    title: "CFO & Board Member",
+    title: "Event Manager",
     image: "https://static.vecteezy.com/system/resources/previews/034/488/032/large_2x/3d-cute-cartoon-woman-character-cartoon-businesswoman-wearing-red-suit-on-transparent-background-png.png",
     linkedin: "#",
   },
   {
     name: "Chaitanya",
-    title: "CTO & Head of Technology",
+    title: "Production & Logistics Manager",
     image: "https://png.pngtree.com/png-vector/20241113/ourlarge/pngtree-professional-woman-using-laptop-png-image_14418003.png",
     linkedin: "#",
   },
   {
     name: "Ankam Jhansi",
-    title: "COO & Head of Operations",
+    title: "Creative & Design Manager",
     image: "https://www.kindpng.com/picc/m/140-1403886_office-girl-cartoon-png-transparent-png.png",
     linkedin: "#",
   },

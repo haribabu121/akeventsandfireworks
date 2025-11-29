@@ -13,16 +13,16 @@ const Events = () => {
     {
       id: 2,
       title: 'sankranthi Festival',
-      date: 'Nov 12, 2023',
+      date: 'Jan 14, 2026',
       location: 'Godavari River Bank',
-      image: 'https://images.unsplash.com/photo-1603403637115-4741e9e7a4f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+      image: 'https://i.pinimg.com/736x/ca/b9/f1/cab9f12141267677a4220eeb44af70ca.jpg'
     },
     {
       id: 3,
       title: 'Wedding Fireworks',
       date: 'Custom Date',
       location: 'Vijayawada',
-      image: 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+      image: 'https://www.sparkfx.com.au/wp-content/uploads/2019/01/3.jpg'
     }
   ];
 

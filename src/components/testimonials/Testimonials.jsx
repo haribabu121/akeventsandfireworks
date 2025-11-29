@@ -50,7 +50,7 @@ const Testimonials = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000, // 5 seconds
+    autoplaySpeed: 3000, // 5 seconds
     pauseOnHover: true,
     responsive: [
       {

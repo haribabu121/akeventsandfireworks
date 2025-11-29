@@ -41,14 +41,21 @@ const Contact = () => {
             <div className="mt-8">
               <h4 className="font-semibold mb-4">Follow Us</h4>
               <div className="flex space-x-4">
-                {['Facebook', 'Whatsapp', 'Instagram', 'YouTube'].map((social) => (
+                {[
+                  { name: 'Facebook', url: 'https://www.facebook.com/' },
+                  { name: 'Whatsapp', url: 'https://web.whatsapp.com/' },
+                  { name: 'Instagram', url: 'https://www.instagram.com/akeventsandfireworks?igsh=MTBwdnk4djgzMXYxcw%3D%3D' },
+                  { name: 'YouTube', url: 'https://www.youtube.com/' }
+                ].map((social) => (
                   <a 
-                    key={social} 
-                    href={`https://www.instagram.com/akeventsandfireworks?igsh=MTBwdnk4djgzMXYxcw%3D%3D${social.toLowerCase()}`}
+                    key={social.name} 
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-yellow-500 hover:text-black transition-colors"
-                    aria-label={social}
+                    aria-label={social.name}
                   >
-                    {social.charAt(0)}
+                    {social.name.charAt(0)}
                   </a>
                 ))}
               </div>
