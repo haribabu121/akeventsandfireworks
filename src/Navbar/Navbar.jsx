@@ -296,23 +296,29 @@ const Navbar = () => {
         </button>
       </div> */}
       <nav className="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-2">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center h-16">
-            <div className="h-12 flex items-center">
-              <Link to="/">
-                <img 
-                  src={Logo} 
-                  alt="AK Events & Fireworks" 
-                  className="w-auto hover:scale-105 transition-transform"
-                  style={{ height: '90px', width: 'auto' }}
-                />
-              </Link>
-            </div>
-            
-            {/* Hamburger - Only on mobile */}
+        <div className="max-w-7xl mx-auto flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="h-12 flex items-center">
+            <Link to="/">
+              <img 
+                src={Logo} 
+                alt="AK Events & Fireworks" 
+                className="w-auto hover:scale-105 transition-transform"
+                style={{ height: '90px', width: 'auto' }}
+              />
+            </Link>
+          </div>
+          
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex-1 lg:flex lg:items-center lg:justify-end">
+            {/* Navigation items will be here */}
+          </div>
+          
+          {/* Mobile Menu Button - Positioned on the right */}
+          <div className="lg:hidden">
             <button 
               onClick={toggleMenu}
-              className="ml-4 lg:hidden text-gray-700 hover:text-green-600 focus:outline-none"
+              className="text-gray-700 hover:text-green-600 focus:outline-none"
               style={{ fontSize: '1.5rem', lineHeight: '1' }}
               aria-label="Toggle menu"
             >
