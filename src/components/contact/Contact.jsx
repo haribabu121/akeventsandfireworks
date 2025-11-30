@@ -1,7 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
+import axios from 'axios';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    
+    try {
+      const response = await axios.post('http://localhost:5000/api/contact', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      if (response.data.success) {
+        setSubmitStatus('success');
+        // Clear form after successful submission
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        setSubmitStatus('error');
+      }
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-20 bg-gray-900 text-white">
       <div className="container mx-auto px-6">
@@ -62,24 +113,40 @@ const Contact = () => {
             </div>
           </div>
           <div>
-            <form className="space-y-6">
+            {submitStatus === 'success' && (
+              <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-md">
+                Thank you for your message! We'll get back to you soon.
+              </div>
+            )}
+            {submitStatus === 'error' && (
+              <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-md">
+                There was an error sending your message. Please try again later.
+              </div>
+            )}
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">Your Name</label>
                   <input 
                     type="text" 
-                    id="name" 
+                    id="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 rounded-md bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
                     placeholder="Enter your name"
+                    required
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
                   <input 
                     type="email" 
-                    id="email" 
+                    id="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 rounded-md bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
                     placeholder="Enter your email"
+                    required
                   />
                 </div>
               </div>
@@ -87,25 +154,32 @@ const Contact = () => {
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-1">Subject</label>
                 <input 
                   type="text" 
-                  id="subject" 
+                  id="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 rounded-md bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   placeholder="How can we help you?"
+                  required
                 />
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">Your Message</label>
                 <textarea 
-                  id="message" 
+                  id="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   rows="5" 
                   className="w-full px-4 py-3 rounded-md bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Tell us about your event..."
+                  placeholder="Your message here..."
+                  required
                 ></textarea>
               </div>
               <button 
                 type="submit" 
-                className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-md transition-colors"
+                disabled={isSubmitting}
+                className={`w-full ${isSubmitting ? 'bg-yellow-600' : 'bg-yellow-500 hover:bg-yellow-600'} text-black font-semibold py-3 px-6 rounded-md transition-colors`}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>

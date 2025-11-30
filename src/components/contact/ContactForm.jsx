@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const ContactForm = () => {
   const navigate = useNavigate();
@@ -7,6 +8,7 @@ const ContactForm = () => {
     name: '',
     phone: '',
     email: '',
+    subject: 'Contact Form Submission',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,30 +25,48 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus(null);
     
     try {
-      // Here you would typically make an API call to submit the form
-      console.log('Form submitted:', formData);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      setSubmitStatus('success');
-      // Clear form after successful submission
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        message: ''
+      // Make API call to submit the form
+      const response = await axios.post('http://localhost:5000/api/contact', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
       
-      // Redirect to home page after 2 seconds
-      setTimeout(() => {
-        navigate('/');
-      }, 2000);
+      if (response.data.success) {
+        setSubmitStatus('success');
+        // Clear form after successful submission
+        setFormData({
+          name: '',
+          phone: '',
+          email: '',
+          subject: 'Contact Form Submission',
+          message: ''
+        });
+        
+        // Redirect to home page after 2 seconds
+        setTimeout(() => {
+          navigate('/');
+        }, 2000);
+      } else {
+        setSubmitStatus('error');
+      }
       
     } catch (error) {
       console.error('Error submitting form:', error);
+      
+      // Handle validation errors
+      if (error.response && error.response.data && error.response.data.errors) {
+        const errorMessages = error.response.data.errors
+          .map(err => Object.values(err)[0])
+          .join(' ');
+        alert(`Validation error: ${errorMessages}`);
+      } else {
+        alert('There was an error submitting the form. Please try again later.');
+      }
+      
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -56,6 +76,8 @@ const ContactForm = () => {
   return (
     <section className="py-20 bg-gray-50">
       <div className="max-w-3xl mx-auto px-6">
+        {/* Add a hidden subject field */}
+        <input type="hidden" name="subject" value={formData.subject} />
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h2>
           <div className="w-24 h-1 bg-yellow-500 mx-auto mb-6"></div>
@@ -87,7 +109,7 @@ const ContactForm = () => {
               onChange={handleChange}
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
-              placeholder="John Doe"
+              placeholder="Enter your name"
             />
           </div>
 
@@ -104,7 +126,7 @@ const ContactForm = () => {
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
-                placeholder="+91 9876543210"
+                placeholder="Enter your phone number"
               />
             </div>
 
