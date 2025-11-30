@@ -61,9 +61,17 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+    // Close all dropdowns when toggling menu
+    if (menuOpen) {
+      setShowAbout(false);
+      setShowProducts(false);
+      setShowServices(false);
+    }
+  };
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId, closeMenu = true) => {
     const headerOffset = isDesktop ? 140 : 110;
     const performScroll = (attempt = 0) => {
       const element = document.getElementById(sectionId);
@@ -76,10 +84,12 @@ const Navbar = () => {
       }
     };
 
-    setShowAbout(false);
-    setShowProducts(false);
-    setShowServices(false);
-    setMenuOpen(false);
+    if (closeMenu) {
+      setShowAbout(false);
+      setShowProducts(false);
+      setShowServices(false);
+      setMenuOpen(false);
+    }
 
     if (location.pathname !== "/") {
       navigate("/");
@@ -192,10 +202,10 @@ const Navbar = () => {
       </div> */}
 
       {/* Main Navbar */}
-      <nav className="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm border-b border-gray-200 px-10 py-2">
-        <div className="max-w-7xl mx-auto flex justify-between">
+      <nav className="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-2">
+        <div className="max-w-7xl mx-auto flex justify-between relative">
           <div className="cursor-pointer mr-2">
-            <img src={Logo} alt="Logo" className="w-30  h-18 hover:scale-105 transition" />
+            <img src={Logo} alt="Logo" className="w-30 h-18 hover:scale-105 transition" />
           </div>
 
           {/* Hamburger */}
@@ -204,8 +214,9 @@ const Navbar = () => {
           </div>
 
           {/* Menu */}
-          <ul className={`lg:flex lg:items-center lg:gap-8 text-sm font-small transition-all pr-4
-            ${menuOpen ? "flex flex-col absolute left-0 top-16 w-full bg-white shadow-md p-6 gap-4" : "hidden lg:flex"}`}
+          <ul className={`lg:flex lg:items-center lg:gap-8 text-sm font-small transition-all pr-4 z-50
+            ${menuOpen ? "flex flex-col absolute left-0 top-16 w-full bg-white shadow-lg p-6 gap-4" : "hidden lg:flex"}`}
+            style={{ zIndex: 1001 }}
           >
 
           {/* Home */}
@@ -229,9 +240,10 @@ const Navbar = () => {
             </div>
 
             {/* Dropdown */}
-            <ul className={`absolute bg-white shadow-lg rounded-lg p-2 w-56 mt-2 transition-all
+            <ul className={`absolute bg-white shadow-xl rounded-lg p-2 w-56 mt-2 transition-all z-50
               ${showAbout ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-3"}
               lg:absolute lg:left-0`}
+              style={{ zIndex: 1002, maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}
             >
               <li className="p-2 hover:bg-green-100 flex items-center gap-2" onClick={() => scrollToSection("about-us")}>
                 <FaInfoCircle /> About Us
@@ -264,8 +276,9 @@ const Navbar = () => {
             </div>
 
             {/* Dropdown */}
-            <ul className={`absolute bg-white shadow-lg p-2 w-60 rounded-lg mt-2 transition-all
+            <ul className={`absolute bg-white shadow-xl p-2 w-60 rounded-lg mt-2 transition-all z-50
               ${showProducts ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-3"}`}
+              style={{ zIndex: 1002, maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}
             >
               <li className="p-2 hover:bg-green-100 flex items-center gap-2" onClick={() => scrollToProductCard("sparkcular-machines")}>
                 <FaFireAlt className="text-orange-500" /> sparkcular machines
@@ -318,8 +331,9 @@ const Navbar = () => {
               />
             </div>
 
-            <ul className={`absolute bg-white shadow-lg p-2 w-64 rounded-lg mt-2 transition-all
+            <ul className={`absolute bg-white shadow-xl p-2 w-64 rounded-lg mt-2 transition-all z-50
               ${showServices ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-3"}`}
+              style={{ zIndex: 1002, maxHeight: 'calc(100vh - 80px)', overflowY: 'auto' }}
             >
               <li className="p-2 hover:bg-green-100 flex items-center gap-2" onClick={() => scrollToServiceCard("cloud-effects")}>
                 <FaCloud className="text-blue-400" /> Cloud Effects
