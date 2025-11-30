@@ -143,6 +143,45 @@ const Navbar = () => {
     setShowProducts(false);
   };
 
+  const scrollToServiceCard = (serviceId) => {
+    // Close the menu and dropdowns
+    setMenuOpen(false);
+    setShowServices(false);
+    
+    // If not on home page, navigate to home first
+    if (location.pathname !== "/") {
+      navigate("/", { 
+        state: { scrollToService: serviceId },
+        replace: true
+      });
+      return;
+    }
+
+    // If already on home page, scroll to the service
+    const element = document.getElementById(`service-${serviceId}`);
+    if (element) {
+      const headerOffset = 100; // Adjust this value based on your header height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+
+      // Add highlight effect
+      element.classList.add("ring-4", "ring-yellow-500", "ring-opacity-70", "transition-all", "duration-1000", "shadow-lg", "z-10", "relative");
+      
+      // Remove highlight after some time
+      setTimeout(() => {
+        element.classList.remove("ring-4", "ring-yellow-500", "ring-opacity-70", "shadow-lg", "z-10", "relative");
+      }, 3000);
+    } else {
+      // If service card not found, just scroll to services section
+      scrollToSection("services");
+    }
+  };
+
   // Handle scroll to product when component mounts or location state changes
   useEffect(() => {
     if (location.state?.scrollTo) {
@@ -186,66 +225,114 @@ const Navbar = () => {
     if (location.pathname !== "/careers") navigate("/careers");
   };
 
+  // Handle scroll to service when component mounts or location state changes
+  useEffect(() => {
+    if (location.state?.scrollToService) {
+      const serviceId = location.state.scrollToService;
+      const scrollToElement = () => {
+        const element = document.getElementById(`service-${serviceId}`);
+        if (element) {
+          const headerOffset = 100;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+
+          // Add highlight effect
+          element.classList.add("ring-4", "ring-yellow-500", "ring-opacity-70", "transition-all", "duration-1000", "shadow-lg", "z-10", "relative");
+          
+          // Remove highlight after some time
+          setTimeout(() => {
+            element.classList.remove("ring-4", "ring-yellow-500", "ring-opacity-70", "shadow-lg", "z-10", "relative");
+          }, 3000);
+
+          // Clear the state to prevent re-scrolling
+          window.history.replaceState({}, document.title);
+        } else if (document.readyState === 'complete') {
+          // If document is already loaded but element not found, try one more time after a delay
+          setTimeout(() => {
+            const el = document.getElementById(`service-${serviceId}`);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth' });
+              // Add highlight effect
+              el.classList.add("ring-4", "ring-yellow-500", "ring-opacity-70", "transition-all", "duration-1000", "shadow-lg", "z-10", "relative");
+              // Remove highlight after some time
+              setTimeout(() => {
+                el.classList.remove("ring-4", "ring-yellow-500", "ring-opacity-70", "shadow-lg", "z-10", "relative");
+              }, 3000);
+            }
+          }, 100);
+        }
+      };
+
+      // Try scrolling immediately
+      scrollToElement();
+
+      // Add event listener for when the component mounts
+      window.addEventListener('load', scrollToElement);
+
+      // Cleanup
+      return () => {
+        window.removeEventListener('load', scrollToElement);
+      };
+    }
+  }, [location.state]);
+
   return (
     <>
       {/* Top Navbar */}
       {/* <div className="bg-slate-900 px-6 md:px-10 py-2 text-slate-300 flex justify-end gap-6 text-sm font-medium">
         <button className="flex items-center gap-2 hover:text-white" onClick={handleCurrentOpeningsClick}>
-          <FaBriefcase /> Current Openings
+          <FaUserTie /> Current Openings
         </button>
         <button className="flex items-center gap-2 hover:text-white" onClick={() => window.open("https://byteskillstech.com/internship.html#internship")}>
           <FaUserGraduate /> Enroll Internship
         </button>
         <button className="flex items-center gap-2 hover:text-white" onClick={() => window.open("https://ulearn.pinkmoontech.com/")}>
-          <FaGraduationCap /> Enroll Training
+          <FaChalkboardTeacher /> ULearn Platform
         </button>
       </div> */}
-
-      {/* Main Navbar */}
-      <nav className="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm border-b border-gray-200 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <img 
-              src={Logo} 
-              alt="Logo" 
-              className="h-12 w-auto hover:scale-105 transition-transform" 
-              style={{ maxHeight: '60px' }}
-            />
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="flex items-center lg:hidden">
-            <button
+      <nav className="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-2">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center h-16">
+            <div className="h-12 flex items-center">
+              <Link to="/">
+                <img 
+                  src={Logo} 
+                  alt="AK Events & Fireworks" 
+                  className="w-auto hover:scale-105 transition-transform"
+                  style={{ height: '90px', width: 'auto' }}
+                />
+              </Link>
+            </div>
+            
+            {/* Hamburger - Only on mobile */}
+            <button 
               onClick={toggleMenu}
-              type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
-              aria-expanded="false"
+              className="ml-4 lg:hidden text-gray-700 hover:text-green-600 focus:outline-none"
+              style={{ fontSize: '1.5rem', lineHeight: '1' }}
+              aria-label="Toggle menu"
             >
-              <span className="sr-only">Open main menu</span>
-              {menuOpen ? (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
+              {menuOpen ? "✕" : "☰"}
             </button>
           </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex lg:items-center lg:space-x-8">
-            <ul className="flex items-center space-x-8 text-sm font-medium">
-              <li>
-                <Link 
-                  to="/" 
-                  className={`flex items-center gap-2 ${location.pathname === '/' ? 'text-green-600' : 'hover:text-green-600'}`}
-                >
-                  <FaHome /> Home
-                </Link>
-              </li>
+          {/* Menu */}
+          <ul className={`lg:flex lg:items-center lg:gap-8 text-sm font-small transition-all pr-4 z-50
+            ${menuOpen ? "flex flex-col absolute left-0 top-16 w-full bg-white shadow-lg p-6 gap-4" : "hidden lg:flex"}`}
+            style={{ zIndex: 1001 }}
+          >
+
+          {/* Home */}
+          <Link 
+            to="/" 
+            className={`flex items-center gap-2 cursor-pointer ${location.pathname === '/' ? 'text-green-600' : 'hover:text-green-600'}`}
+          >
+            <FaHome /> Home
+          </Link>
 
           {/* About Us */}
           <li
@@ -390,50 +477,16 @@ const Navbar = () => {
             <FaIndustry /> Industries
           </li> */}
 
-              <li>
-                <Link 
-                  to="/contact" 
-                  className="flex items-center gap-2 hover:text-green-600"
-                >
-                  <FaPhoneAlt /> Contact Us
-                </Link>
-              </li>
+          {/* Contact */}
+          <Link to="/contact" className="flex items-center gap-2 hover:text-green-600 cursor-pointer">
+            <FaPhoneAlt /> Contact Us
+          </Link>
 
-              {/* Case Studies - Commented out for now
-              <li>
-                <Link to="#" className="flex items-center gap-2 hover:text-green-600">
-                  <FaBookOpen /> Case Studies
-                </Link>
-              </li>
-              */}
-            </ul>
-          </div>
-          
-          {/* Mobile Menu */}
-          {menuOpen && (
-            <div className="lg:hidden absolute top-16 left-0 right-0 bg-white shadow-lg p-6 z-50">
-              <ul className="space-y-4">
-                <li>
-                  <Link 
-                    to="/" 
-                    className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-md"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <FaHome /> Home
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/contact" 
-                    className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-md"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <FaPhoneAlt /> Contact Us
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          )}
+          {/* Case Studies */}
+          {/* <li className="flex items-center gap-2 hover:text-green-600 cursor-pointer">
+            <FaBookOpen /> Case Studies
+          </li> */}
+          </ul>
         </div>
       </nav>
     </>
