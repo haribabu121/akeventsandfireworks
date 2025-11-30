@@ -202,30 +202,50 @@ const Navbar = () => {
       </div> */}
 
       {/* Main Navbar */}
-      <nav className="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-2">
-        <div className="max-w-7xl mx-auto flex justify-between relative">
-          <div className="cursor-pointer mr-2">
-            <img src={Logo} alt="Logo" className="w-30 h-18 hover:scale-105 transition" />
+      <nav className="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm border-b border-gray-200 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <img 
+              src={Logo} 
+              alt="Logo" 
+              className="h-12 w-auto hover:scale-105 transition-transform" 
+              style={{ maxHeight: '60px' }}
+            />
           </div>
 
-          {/* Hamburger */}
-          <div className="text-3xl cursor-pointer lg:hidden" onClick={toggleMenu}>
-            {menuOpen ? "✕" : "☰"}
+          {/* Mobile menu button */}
+          <div className="flex items-center lg:hidden">
+            <button
+              onClick={toggleMenu}
+              type="button"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open main menu</span>
+              {menuOpen ? (
+                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
           </div>
 
-          {/* Menu */}
-          <ul className={`lg:flex lg:items-center lg:gap-8 text-sm font-small transition-all pr-4 z-50
-            ${menuOpen ? "flex flex-col absolute left-0 top-16 w-full bg-white shadow-lg p-6 gap-4" : "hidden lg:flex"}`}
-            style={{ zIndex: 1001 }}
-          >
-
-          {/* Home */}
-          <Link 
-            to="/" 
-            className={`flex items-center gap-2 cursor-pointer ${location.pathname === '/' ? 'text-green-600' : 'hover:text-green-600'}`}
-          >
-            <FaHome /> Home
-          </Link>
+          {/* Desktop Menu */}
+          <div className="hidden lg:flex lg:items-center lg:space-x-8">
+            <ul className="flex items-center space-x-8 text-sm font-medium">
+              <li>
+                <Link 
+                  to="/" 
+                  className={`flex items-center gap-2 ${location.pathname === '/' ? 'text-green-600' : 'hover:text-green-600'}`}
+                >
+                  <FaHome /> Home
+                </Link>
+              </li>
 
           {/* About Us */}
           <li
@@ -370,16 +390,50 @@ const Navbar = () => {
             <FaIndustry /> Industries
           </li> */}
 
-          {/* Contact */}
-          <Link to="/contact" className="flex items-center gap-2 hover:text-green-600 cursor-pointer">
-            <FaPhoneAlt /> Contact Us
-          </Link>
+              <li>
+                <Link 
+                  to="/contact" 
+                  className="flex items-center gap-2 hover:text-green-600"
+                >
+                  <FaPhoneAlt /> Contact Us
+                </Link>
+              </li>
 
-          {/* Case Studies */}
-          {/* <li className="flex items-center gap-2 hover:text-green-600 cursor-pointer">
-            <FaBookOpen /> Case Studies
-          </li> */}
-          </ul>
+              {/* Case Studies - Commented out for now
+              <li>
+                <Link to="#" className="flex items-center gap-2 hover:text-green-600">
+                  <FaBookOpen /> Case Studies
+                </Link>
+              </li>
+              */}
+            </ul>
+          </div>
+          
+          {/* Mobile Menu */}
+          {menuOpen && (
+            <div className="lg:hidden absolute top-16 left-0 right-0 bg-white shadow-lg p-6 z-50">
+              <ul className="space-y-4">
+                <li>
+                  <Link 
+                    to="/" 
+                    className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-md"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <FaHome /> Home
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/contact" 
+                    className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-md"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <FaPhoneAlt /> Contact Us
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </nav>
     </>
