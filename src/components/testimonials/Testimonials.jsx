@@ -53,7 +53,7 @@ const Testimonials = () => {
     const { className, style, onClick } = props;
     return (
       <div
-        className={`${className} !right-0 !mr-2 sm:!mr-4 z-10`}
+        className={`${className} !right-0 !mr-1 sm:!mr-2 md:!mr-3 lg:!mr-4 z-10`}
         style={{ 
           ...style, 
           display: 'flex', 
@@ -61,12 +61,24 @@ const Testimonials = () => {
           justifyContent: 'center',
           background: 'rgba(0,0,0,0.7)', 
           borderRadius: '50%', 
-          width: '44px', 
-          height: '44px',
+          width: '36px', 
+          height: '36px',
+          '@media (min-width: 640px)': {
+            width: '40px',
+            height: '40px'
+          },
+          '@media (min-width: 1024px)': {
+            width: '44px',
+            height: '44px'
+          },
           WebkitTapHighlightColor: 'transparent',
           transform: 'translateZ(0)',
           willChange: 'transform',
-          transition: 'opacity 0.3s ease, transform 0.3s ease'
+          transition: 'all 0.3s ease',
+          '&:hover': {
+            transform: 'scale(1.1) translateZ(0)',
+            background: 'rgba(0,0,0,0.9)'
+          }
         }}
         onClick={onClick}
         aria-label="Next testimonial"
@@ -86,7 +98,7 @@ const Testimonials = () => {
     const { className, style, onClick } = props;
     return (
       <div
-        className={`${className} !left-0 !ml-2 sm:!ml-4 z-10`}
+        className={`${className} !left-0 !ml-1 sm:!ml-2 md:!ml-3 lg:!ml-4 z-10`}
         style={{ 
           ...style, 
           display: 'flex', 
@@ -94,12 +106,24 @@ const Testimonials = () => {
           justifyContent: 'center',
           background: 'rgba(0,0,0,0.7)', 
           borderRadius: '50%', 
-          width: '44px', 
-          height: '44px',
+          width: '36px', 
+          height: '36px',
+          '@media (min-width: 640px)': {
+            width: '40px',
+            height: '40px'
+          },
+          '@media (min-width: 1024px)': {
+            width: '44px',
+            height: '44px'
+          },
           WebkitTapHighlightColor: 'transparent',
           transform: 'translateZ(0)',
           willChange: 'transform',
-          transition: 'opacity 0.3s ease, transform 0.3s ease'
+          transition: 'all 0.3s ease',
+          '&:hover': {
+            transform: 'scale(1.1) translateZ(0)',
+            background: 'rgba(0,0,0,0.9)'
+          }
         }}
         onClick={onClick}
         aria-label="Previous testimonial"
@@ -135,19 +159,29 @@ const Testimonials = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Enhanced settings for optimal Android performance
+  // Enhanced settings for optimal responsiveness
   const settings = {
     dots: true,
     infinite: true,
-    speed: 600,
+    speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 6000,
+    autoplaySpeed: 5000,
     pauseOnHover: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     responsive: [
+      {
+        breakpoint: 1536, // 2xl screens
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          centerMode: false,
+          centerPadding: '0',
+          dots: true
+        }
+      },
       {
         breakpoint: 1280, // xl screens
         settings: {
@@ -155,6 +189,7 @@ const Testimonials = () => {
           slidesToScroll: 1,
           centerMode: false,
           centerPadding: '0',
+          dots: true
         }
       },
       {
@@ -163,7 +198,8 @@ const Testimonials = () => {
           slidesToShow: 2,
           slidesToScroll: 1,
           centerMode: false,
-          centerPadding: '40px',
+          centerPadding: '20px',
+          dots: true
         }
       },
       {
@@ -172,45 +208,50 @@ const Testimonials = () => {
           slidesToShow: 1,
           slidesToScroll: 1,
           centerMode: true,
-          centerPadding: '60px',
+          centerPadding: '15%',
+          dots: true
         }
       },
       {
-        breakpoint: 480, // sm screens
+        breakpoint: 640, // sm screens
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
           centerMode: true,
-          centerPadding: '30px',
+          centerPadding: '10%',
+          dots: true
+        }
+      },
+      {
+        breakpoint: 480, // xs screens
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: '5%',
+          dots: true
         }
       }
     ]
   };
 
   return (
-    <section className="testimonial-slider py-12 sm:py-16 lg:py-20 bg-gray-100">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-gray-900">
+    <section className="testimonial-slider py-10 sm:py-14 md:py-16 lg:py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-gray-900 px-2">
           What Our Clients Say
         </h2>
-        <div className="testimonial-slider-container">
-          <Slider {...settings} className="px-1 sm:px-2 md:px-4">
+        <div className="testimonial-slider-container relative">
+          <Slider {...settings} className="px-0 sm:px-1 md:px-2">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="px-1 sm:px-2 py-2 sm:py-4">
-                <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg h-full transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col">
+              <div key={index} className="px-1.5 sm:px-2.5 py-2 sm:py-3 md:py-4">
+                <div className="bg-white p-4 sm:p-5 md:p-6 rounded-xl shadow-md h-full transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col mx-1 sm:mx-1.5 md:mx-2">
                   <div className="flex-grow">
-                    <p className="text-sm sm:text-base text-gray-600 italic mb-4 leading-relaxed">"{testimonial.quote}"</p>
+                    <p className="text-gray-600 italic mb-4 text-sm sm:text-[15px] md:text-base leading-relaxed">"{testimonial.quote}"</p>
                   </div>
-                  <div className="mt-4 pt-4 border-t border-gray-100">
-                    <div className="flex items-center">
-                      <div className="bg-yellow-500 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-base">
-                        {testimonial.author.charAt(0)}
-                      </div>
-                      <div className="ml-3">
-                        <p className="text-sm sm:text-base font-semibold text-gray-800">{testimonial.author}</p>
-                        <p className="text-xs sm:text-sm text-gray-500">{testimonial.role}</p>
-                      </div>
-                    </div>
+                  <div className="mt-auto pt-3 border-t border-gray-100">
+                    <p className="font-semibold text-gray-900 text-sm sm:text-base">{testimonial.author}</p>
+                    <p className="text-xs sm:text-sm text-gray-500">{testimonial.role}</p>
                   </div>
                 </div>
               </div>
