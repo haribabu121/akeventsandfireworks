@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import heroVideo from './hero.mp4';
 
 const Hero = () => {
   const videoRef = useRef(null);
@@ -34,17 +35,24 @@ const Hero = () => {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover"
-          poster="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+          className="w-full h-full object-cover brightness-100 contrast-105"
+          style={{
+            objectFit: 'cover',
+            minHeight: '100vh',
+            width: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          }}
         >
           <source 
-            src="https://ak-events-bucket.s3.amazonaws.com/fireworks-show.mp4" 
+            src={heroVideo} 
             type="video/mp4" 
           />
           Your browser does not support the video tag.
         </video>
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70"></div>
+        {/* Lighter Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/40"></div>
       </div>
       
       {/* Content */}

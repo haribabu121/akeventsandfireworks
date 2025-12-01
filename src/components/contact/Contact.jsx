@@ -94,7 +94,7 @@ const Contact = () => {
               <div className="flex space-x-4">
                 {[
                   { name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61584294129668' },
-                  { name: 'Whatsapp', url: 'https://web.whatsapp.com/' },
+                  { name: 'Whatsapp', url: 'https://whatsapp.com/channel/0029VbBCCipHltYDmRN5vN3x' },
                   { name: 'Instagram', url: 'https://www.instagram.com/akeventsandfireworks?igsh=MTBwdnk4djgzMXYxcw%3D%3D' },
                   { name: 'YouTube', url: 'https://www.youtube.com/' }
                 ].map((social) => (
