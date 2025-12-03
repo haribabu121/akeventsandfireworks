@@ -5,7 +5,6 @@ import Products from './components/products/Products';
 import About from './components/about/About';
 import Services from './components/services/Services';
 import Events from './components/events/Events';
-import Testimonials from './components/testimonials/Testimonials';
 import Contact from './components/contact/Contact';
 import Footer from './components/footer/Footer';
 import ExecutiveTeam from './components/Executive Team/ExecutiveTeam';
@@ -27,7 +26,6 @@ function App() {
                 <Products />
                 <Services />
                 <Events />
-                <Testimonials />
                 <FAQSection/>
                 <Contact />
                 <Footer />
