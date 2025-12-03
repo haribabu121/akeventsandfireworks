@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import './Testimonials.css';
 
 // Detect Android device
 const isAndroid = () => {
@@ -238,9 +239,16 @@ const Testimonials = () => {
   return (
     <section className="testimonial-slider py-10 sm:py-14 md:py-16 lg:py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-gray-900 px-2">
-          What Our Clients Say
-        </h2>
+        <div className="text-center mb-8 md:mb-12">
+          <div className="group">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-900 px-2 mb-4 group-hover:text-yellow-500 transition-colors duration-300">
+              What Our Clients Say
+            </h2>
+            <div className="group relative">
+              <div className="w-24 h-1.5 mx-auto transform origin-left transition-all duration-500 group-hover:scale-x-125 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 bg-size-200 group-hover:bg-pos-0 bg-pos-100"></div>
+            </div>
+          </div>
+        </div>
         <div className="testimonial-slider-container relative">
           <Slider {...settings} className="px-0 sm:px-1 md:px-2">
             {testimonials.map((testimonial, index) => (

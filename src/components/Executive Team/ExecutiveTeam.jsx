@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { FaLinkedin } from "react-icons/fa";
+import React, { useState } from 'react';
+import { FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
+import './ExecutiveTeam.css';
 import dpImage from "./dp.jpg";
 const teamMembers = [
   {
@@ -85,8 +86,12 @@ const ExecutiveTeam = () => {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Executive Team</h2>
-          <div className="w-24 h-1 bg-yellow-500 mx-auto mb-6"></div>
+          <div className="group">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 group-hover:text-yellow-500 transition-colors duration-300">Executive Team</h2>
+            <div className="group relative">
+              <div className="w-24 h-1.5 mx-auto mb-6 transform origin-left transition-all duration-500 group-hover:scale-x-125 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 bg-size-200 group-hover:bg-pos-0 bg-pos-100"></div>
+            </div>
+          </div>
           <p className="text-gray-600 max-w-2xl mx-auto">
             With more than two decades of expertise in the IT sector, our
             executive leadership team provides strategic direction and

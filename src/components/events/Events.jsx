@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaMapMarkerAlt } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
 const Events = () => {
   const events = [
@@ -30,8 +30,12 @@ const Events = () => {
     <section id="events" className="py-20 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Upcoming Events</h2>
-          <div className="w-24 h-1 bg-yellow-500 mx-auto"></div>
+          <div className="group">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 group-hover:text-yellow-500 transition-colors duration-300">Upcoming Events</h2>
+            <div className="group relative">
+              <div className="w-24 h-1.5 mx-auto transform origin-left transition-all duration-500 group-hover:scale-x-125 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 bg-size-200 group-hover:bg-pos-0 bg-pos-100"></div>
+            </div>
+          </div>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.map((event) => (

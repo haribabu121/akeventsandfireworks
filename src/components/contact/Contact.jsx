@@ -57,8 +57,12 @@ const Contact = () => {
     <section id="contact" className="py-20 bg-gray-900 text-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Get In Touch</h2>
-          <div className="w-24 h-1 bg-yellow-500 mx-auto"></div>
+          <div className="group">
+            <h2 className="text-4xl font-bold mb-4 group-hover:text-yellow-500 transition-colors duration-300">Get In Touch</h2>
+            <div className="group relative">
+              <div className="w-24 h-1.5 mx-auto transform origin-left transition-all duration-500 group-hover:scale-x-125 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 bg-size-200 group-hover:bg-pos-0 bg-pos-100"></div>
+            </div>
+          </div>
         </div>
         <div className="grid md:grid-cols-2 gap-12">
           <div>

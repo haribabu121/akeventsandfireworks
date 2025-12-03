@@ -6,8 +6,12 @@ const About = () => {
     <section id="about-us" className="py-12 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">About AK Events & Fireworks</h2>
-          <div className="w-24 h-1 bg-yellow-500 mx-auto"></div>
+          <div className="group">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 group-hover:text-yellow-500 transition-colors duration-300">About AK Events & Fireworks</h2>
+            <div className="group relative">
+              <div className="w-24 h-1.5 mx-auto transform origin-left transition-all duration-500 group-hover:scale-x-125 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 bg-size-200 group-hover:bg-pos-0 bg-pos-100"></div>
+            </div>
+          </div>
         </div>
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-10 md:mb-0 md:pr-10">
@@ -49,6 +53,14 @@ const About = () => {
               <div className="absolute -bottom-6 -right-6 bg-yellow-500 text-black p-6 rounded-lg shadow-lg w-48">
                 <span className="block text-4xl font-bold">1+</span>
                 <span className="text-lg">Years Experience</span>
+              </div>
+              <div className="mt-10">
+                <a 
+                  href="#contact" 
+                  className="inline-block bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 text-white font-semibold py-3 px-8 rounded-full hover:shadow-lg hover:scale-105 transform transition-all duration-300 bg-size-200 hover:bg-pos-0 bg-pos-100"
+                >
+                  Get in Touch
+                </a>
               </div>
             </div>
           </div>

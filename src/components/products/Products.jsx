@@ -252,8 +252,10 @@ const Products = () => {
     <section id="products" className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Products</h2>
-          <div className="w-24 h-1 bg-yellow-500 mx-auto"></div>
+          <div className="group">
+            <h1 className="text-4xl font-bold text-center mb-8 group-hover:text-yellow-500 transition-colors duration-300">Our Products</h1>
+            <div className="w-24 h-1.5 mx-auto bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 bg-size-200 group-hover:bg-pos-0 bg-pos-100 transition-all duration-500 group-hover:scale-x-125 transform origin-left"></div>
+          </div>
           <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
             Explore our premium collection of fireworks and event products designed to make your celebrations unforgettable.
           </p>
@@ -288,7 +290,7 @@ const Products = () => {
                         </div>
                       </div>
                       <div className="p-6 flex-1 flex flex-col">
-                        <h3 className="text-xl font-bold mb-2">{product.name}</h3>
+                        <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
                         <div className="flex items-center mb-3">
                           {[...Array(5)].map((_, i) => (
                             <FaStar 
