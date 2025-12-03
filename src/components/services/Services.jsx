@@ -47,7 +47,7 @@ const Services = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
           <div className="group">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 group-hover:text-yellow-500 transition-colors duration-300">Our Services</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-3 group-hover:text-yellow-500 transition-colors duration-300">Our Services</h2>
             <div className="group relative">
               <div className="w-24 h-1.5 mx-auto rounded-full transform origin-left transition-all duration-500 group-hover:scale-x-125 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 bg-size-200 group-hover:bg-pos-0 bg-pos-100"></div>
             </div>

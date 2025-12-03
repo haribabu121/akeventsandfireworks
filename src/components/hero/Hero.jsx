@@ -57,10 +57,11 @@ const Hero = () => {
       
       {/* Content */}
       <div className="container mx-auto px-6 z-10 text-center">
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in">
-          <span className="text-yellow-400">AK</span> Events & Fireworks
-        </h1>
-        <p className="text-xl md:text-2xl lg:text-3xl mb-10 max-w-3xl mx-auto font-light">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 animate-fade-in">
+  <span className="text-yellow-400">AK</span> Events & Fireworks
+</h1>
+
+        <p className="text-xl md:text-2xl lg:text-2xl mb-10 max-w-3xl mx-auto font-light">
           Igniting Your Special Moments with Spectacular Fireworks & Unforgettable Events
         </p>
         
