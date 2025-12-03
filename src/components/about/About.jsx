@@ -54,14 +54,6 @@ const About = () => {
                 <span className="block text-4xl font-bold">1+</span>
                 <span className="text-lg">Years Experience</span>
               </div>
-              <div className="mt-10">
-                <a 
-                  href="#contact" 
-                  className="inline-block bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 text-white font-semibold py-3 px-8 rounded-full hover:shadow-lg hover:scale-105 transform transition-all duration-300 bg-size-200 hover:bg-pos-0 bg-pos-100"
-                >
-                  Get in Touch
-                </a>
-              </div>
             </div>
           </div>
         </div>
