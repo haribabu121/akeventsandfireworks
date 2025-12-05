@@ -60,7 +60,7 @@ const EVENTS_DATA = [
     time: '06:00 AM - 10:00 PM',
     location: 'Godavari River Bank',
     address: 'Rajahmundry, Andhra Pradesh',
-    mapLink: 'https://goo.gl/maps/example2',
+    mapLink: 'https://www.google.com/maps/place/S+V+Function+Hall/data=!4m7!3m6!1s0x3a37a3bf6658436f:0x9f226cd13ee3e272!8m2!3d17.0061563!4d81.804959!16s%2Fg%2F11b6sxd11j!19sChIJb0NYZr-jNzoRcuLjPtFsIp8?authuser=0&hl=en&rclk=1',
     ticketPrice: 'Free Entry',
     description: 'Celebrate the harvest festival with traditional rituals, cultural performances, and a grand fireworks display over the Godavari river.',
     highlights: [
@@ -71,8 +71,8 @@ const EVENTS_DATA = [
       'Evening fireworks over the river'
     ],
     image: 'https://i.pinimg.com/736x/ca/b9/f1/cab9f12141267677a4220eeb44af70ca.jpg',
-    galleryImage1: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-    galleryImage2: 'https://i.pinimg.com/originals/73/29/05/7329054145993e70de302920b4b11500.jpg'
+    galleryImage1: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=549&h=415&q=80',
+    galleryImage2: 'https://i.pinimg.com/736x/92/cf/9b/92cf9b901a421471ee4b6f7b9055b8f7.jpg'
   },
   {
     id: 'wedding-fireworks',
@@ -87,8 +87,8 @@ const EVENTS_DATA = [
       'Professional setup and cleanup'
     ],
     image: 'https://www.sparkfx.com.au/wp-content/uploads/2019/01/3.jpg',
-    galleryImage1: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-    galleryImage2: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+    galleryImage1: 'https://flashfireworks.com.au/wp-content/uploads/2020/11/indoor-fireworks-wedding-background-1536x1026.jpg',
+    galleryImage2: 'https://media.istockphoto.com/id/2098903945/photo/the-bride-and-groom-on-the-wedding-ceremony-venue-with-fireworks-at-night.webp?a=1&b=1&s=612x612&w=0&k=20&c=tBkj3dAmiFhF03fTjDRAhItFa2Zd5vw3FdxfetZ8OYk='
   }
 ];
 
