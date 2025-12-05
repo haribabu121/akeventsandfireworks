@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaCloud, FaHorse, FaFire, FaMusic } from 'react-icons/fa';
 import { GiFlowers, GiSparkles } from 'react-icons/gi';
+import { Link } from 'react-router-dom';
 
 const Services = () => {
   const services = [
@@ -79,12 +80,22 @@ const Services = () => {
                 </p>
                 
                 <div className="mt-auto pt-4 w-full border-t border-gray-100 group-hover:border-gray-200 transition-colors duration-300">
-                  <span className="inline-flex items-center text-sm font-medium text-yellow-600 group-hover:text-yellow-700 transition-colors duration-300">
+                  <Link 
+                    to={
+                      service.id === 'cloud-effects' ? '/services/cloud-effects' :
+                      service.id === 'luxury-wedding' ? '/services/luxury-wedding' :
+                      service.id === 'grand-entry' ? '/services/grand-entry' :
+                      service.id === 'venue-decoration' ? '/services/venue-decoration' :
+                      service.id === 'fireworks' ? '/services/fireworks' :
+                      service.id === 'sound-light' ? '/services/sound-light-visual' : '#'
+                    }
+                    className="inline-flex items-center text-sm font-medium text-yellow-600 hover:text-yellow-700 transition-colors duration-300"
+                  >
                     Learn more
                     <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                     </svg>
-                  </span>
+                  </Link>
                 </div>
               </div>
               

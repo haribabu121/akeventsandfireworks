@@ -1,28 +1,32 @@
 import React from 'react';
 import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Events = () => {
   const events = [
     {
-      id: 1,
+      id: 'new-year-celebration',
       title: 'New Year Celebration',
       date: 'Dec 31, 2025',
-      location: 'public grounds',
-      image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+      location: 'Public Grounds, Vijayawada',
+      image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
+      description: 'Ring in the New Year with a spectacular fireworks display and live entertainment.'
     },
     {
-      id: 2,
-      title: 'sankranthi Festival',
+      id: 'sankranthi-festival',
+      title: 'Sankranthi Festival',
       date: 'Jan 14, 2026',
       location: 'Godavari River Bank',
-      image: 'https://i.pinimg.com/736x/ca/b9/f1/cab9f12141267677a4220eeb44af70ca.jpg'
+      image: 'https://i.pinimg.com/736x/ca/b9/f1/cab9f12141267677a4220eeb44af70ca.jpg',
+      description: 'Celebrate the harvest festival with traditional rituals and cultural performances.'
     },
     {
-      id: 3,
+      id: 'wedding-fireworks',
       title: 'Wedding Fireworks',
       date: 'Custom Date',
       location: 'Vijayawada',
-      image: 'https://www.sparkfx.com.au/wp-content/uploads/2019/01/3.jpg'
+      image: 'https://www.sparkfx.com.au/wp-content/uploads/2019/01/3.jpg',
+      description: 'Make your special day even more magical with our custom wedding fireworks.'
     }
   ];
 
@@ -59,9 +63,12 @@ const Events = () => {
                   <FaMapMarkerAlt className="mr-2 text-red-500" />
                   <span>{event.location}</span>
                 </div>
-                <button className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-colors">
+                <Link 
+                  to={`/events/${event.id}`}
+                  className="block w-full text-center bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-colors"
+                >
                   Learn More
-                </button>
+                </Link>
               </div>
             </div>
           ))}
