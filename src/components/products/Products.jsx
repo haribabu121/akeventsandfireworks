@@ -6,34 +6,6 @@ import { enUS } from "date-fns/locale/en-US";
 import emailjs from "emailjs-com";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-// Touch handling styles component
-const TouchStyles = () => (
-  <style jsx global>{`
-    .rbc-day-bg {
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .rbc-month-row {
-      touch-action: manipulation;
-    }
-    .rbc-day-slot {
-      touch-action: manipulation;
-    }
-  `}</style>
-);
-
-// Mobile touch handling styles
-const styles = `
-  .rbc-day-bg {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .rbc-month-row {
-    -webkit-tap-highlight-color: transparent;
-  }
-`;
-
-// Calendar localizer
 const localizer = dateFnsLocalizer({
   format,
   parse,
@@ -42,7 +14,6 @@ const localizer = dateFnsLocalizer({
   locales: { "en-US": enUS },
 });
 
-// Custom toolbar
 const CustomToolbar = ({ label, onNavigate }) => (
   <div className="rbc-toolbar flex items-center justify-between mb-3">
     <button className="rbc-btn" onClick={() => onNavigate("TODAY")}>Today</button>
@@ -54,11 +25,7 @@ const CustomToolbar = ({ label, onNavigate }) => (
   </div>
 );
 
-// Helper function to show alerts in a mobile-friendly way
-const showAlert = (message) => {
-  // Use browser's alert for now, but you could replace with a custom modal
-  alert(message);
-};
+const showAlert = (message) => alert(message);
 
 const Products = () => {
   const [showForm, setShowForm] = useState(false);
@@ -68,7 +35,6 @@ const Products = () => {
   const [formData, setFormData] = useState({ name: "", email: "", occasion: "" });
   const [events, setEvents] = useState([]);
 
-  // Load bookings from localStorage
   useEffect(() => {
     const savedEvents = localStorage.getItem("bookedEvents");
     if (savedEvents) {
@@ -81,7 +47,6 @@ const Products = () => {
     }
   }, []);
 
-  // Save bookings to localStorage whenever events change
   useEffect(() => {
     localStorage.setItem("bookedEvents", JSON.stringify(events));
   }, [events]);
@@ -93,13 +58,12 @@ const Products = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    alert("Form submitted successfully!");
     setShowForm(false);
     setShowCalendar(true);
   };
 
-  const processDateSelection = (slotInfo) => {
-    const selectedDate = new Date(slotInfo.start || slotInfo);
+  const processDateSelection = (date) => {
+    const selectedDate = new Date(date);
     selectedDate.setHours(12, 0, 0, 0);
 
     const today = new Date();
@@ -131,40 +95,19 @@ const Products = () => {
         product: selectedProduct?.name
       };
 
-      const updatedEvents = [...events, newEvent];
-      setEvents(updatedEvents);
+      setEvents([...events, newEvent]);
 
       if (formData.email) {
         sendEmail(selectedDate);
       }
 
       showAlert(`Booking confirmed for ${selectedProduct?.name} on ${selectedDate.toDateString()}!`);
-
-      setTimeout(() => {
-        setShowCalendar(false);
-        setShowForm(false);
-      }, 100);
+      setShowCalendar(false);
     }
   };
 
-  const handleSelectSlot = (slotInfo) => {
-    // For mobile, process immediately
-    if ('ontouchstart' in window) {
-      processDateSelection(slotInfo);
-      return;
-    }
-
-    // For desktop, use debounce logic
-    if (window.touchTimer) {
-      clearTimeout(window.touchTimer);
-      window.touchTimer = null;
-      return;
-    }
-
-    window.touchTimer = setTimeout(() => {
-      processDateSelection(slotInfo);
-      window.touchTimer = null;
-    }, 50);
+  const handleSelectSlot = ({ start }) => {
+    processDateSelection(start);
   };
 
   const sendEmail = (date) => {
@@ -199,92 +142,30 @@ const Products = () => {
       description: "Powerful and loud flame machine.",
       image: "https://image.made-in-china.com/2f0j00vzoUnSiaJTqY/DJ-Party-Show-200W-Colorful-Firing-Machine-Stage-Effect-Fire-Flame-Machine.jpg"
     },
-    {
-      id: 3,
-      name: "co2-jets",
-      price: "10000$",
-      rating: 4.7,
-      description: "Beautiful CO2 jet effect.",
-      image: "https://tse4.mm.bing.net/th/id/OIP.H8SO6gvIrkrq3JE7XdKLlgHaHW?rs=1&pid=ImgDetMain&o=7&rm=3"
-    },
-    {
-      id: 4,
-      name: 'smoke-bubble-machines',
-      price: '4000$',
-      rating: 4.7,
-      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
-      image: 'https://m.media-amazon.com/images/I/71XRUGq9bBL._AC_SL1500_.jpg',
-      features: [
-        'Elegant golden display',
-        'Duration: 5 minutes',
-        'Creates a romantic ambiance',
-        'Perfect for weddings'
-      ]
-    },
-    {
-      id: 5,
-      name: 'co2-jumbo-paper-machines',
-      price: '12000$',
-      rating: 4.7,
-      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
-      image: 'https://5.imimg.com/data5/SELLER/Default/2022/10/KO/CL/NP/102604979/1663308629h06942b37ce214c7fb7de4af487c07ef5e-1000x1000.jpg',
-      features: [
-        'Elegant golden display',
-        'shots: 10',
-        'Creates a romantic ambiance',
-        'Perfect for Entry concepts'
-      ]
-    },
-    {
-      id: 6,
-      name: 'co2-jet',
-      price: '8000$',
-      rating: 4.7,
-      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
-      image: 'https://tse3.mm.bing.net/th/id/OIP.4lLFDzNx3k0jSkkIeeQlDwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
-      features: [
-        'Elegant golden display',
-        'shots:6 to 8 ',
-        'Creates a romantic ambiance',
-        'Perfect for stage programs'
-      ]
-    },
-    {
-      id: 7,
-      name: 'cold-fires',
-      price: '800$',
-      rating: 4.7,
-      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
-      image: 'https://i.ytimg.com/vi/sykuhysgetY/maxresdefault.jpg',
-      features: [
-        'Elegant golden display',
-        'Duration: 30seconds',
-        'Creates a romantic ambiance',
-        'Perfect for weddings'
-      ]
-    },
-    {
-      id: 8,
-      name: 'smoke-gun',
-      price: '6000$',
-      rating: 4.7,
-      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
-      image: 'https://tse1.mm.bing.net/th/id/OIP.Loh9p4wds6L7ifFmwQu2uwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
-      features: [
-        'Elegant golden display',
-        'shots:5',
-        'Creates a romantic ambiance',
-        'Perfect for Entry concepts'
-      ]
-    },
   ];
 
+  // Custom dateCellWrapper to make single-tap work on mobile
+  const DateCellWrapper = ({ children, value }) => {
+    const handleClick = (e) => {
+      e.preventDefault();
+      processDateSelection(value);
+    };
+
+    return (
+      <div
+        onClick={handleClick}
+        onTouchEnd={handleClick}
+        style={{ height: "100%", cursor: "pointer", userSelect: "none" }}
+      >
+        {children}
+      </div>
+    );
+  };
 
   return (
     <section id="products" className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
         <h1 className="text-4xl text-center font-bold mb-10">Our Products</h1>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map(p => (
             <div key={p.id} className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl">
@@ -340,45 +221,16 @@ const Products = () => {
               onSelectSlot={handleSelectSlot}
               components={{
                 toolbar: CustomToolbar,
-                dateCellWrapper: ({ children, value }) => {
-                  const handleInteraction = (e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    handleSelectSlot({ start: value, nativeEvent: e });
-                    return false;
-                  };
-
-                  return (
-                    <div 
-                      className="rbc-day-bg"
-                      onTouchStart={handleInteraction}
-                      onClick={handleInteraction}
-                      onTouchEnd={(e) => e.preventDefault()}
-                      style={{
-                        height: '100%',
-                        touchAction: 'manipulation',
-                        WebkitTapHighlightColor: 'transparent',
-                        msTouchAction: 'manipulation',
-                        WebkitUserSelect: 'none',
-                        userSelect: 'none'
-                      }}
-                    >
-                      {children}
-                    </div>
-                  );
-                }
+                dateCellWrapper: DateCellWrapper
               }}
               defaultView={Views.MONTH}
               views={[Views.MONTH]}
-              style={{ 
+              style={{
                 height: 'auto',
                 minHeight: '300px',
                 maxHeight: '80vh',
-                touchAction: 'manipulation' // Improves touch responsiveness
+                touchAction: 'manipulation'
               }}
-              // Add mobile-specific props
-              selectable={true}
-              longPressThreshold={100} // Slightly longer press threshold for mobile
             />
           </div>
         </div>
