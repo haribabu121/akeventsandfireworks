@@ -308,16 +308,34 @@ const Products = () => {
               onSelectSlot={handleSelectSlot}
               components={{
                 toolbar: CustomToolbar,
-                dateCellWrapper: DateCellWrapper
+                // Add touch tap handler for better mobile support
+                dateCellWrapper: ({ children, value }) => (
+                  <div 
+                    className="rbc-day-bg" 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSelectSlot({ start: value });
+                    }}
+                    style={{
+                      height: '100%',
+                      WebkitTapHighlightColor: 'transparent'
+                    }}
+                  >
+                    {children}
+                  </div>
+                )
               }}
               defaultView={Views.MONTH}
               views={[Views.MONTH]}
-              style={{
+              style={{ 
                 height: 'auto',
                 minHeight: '300px',
                 maxHeight: '80vh',
-                touchAction: 'manipulation'
+                touchAction: 'manipulation' // Improves touch responsiveness
               }}
+              // Add mobile-specific props
+              selectable={true}
+              longPressThreshold={100} // Slightly longer press threshold for mobile
             />
           </div>
         </div>
