@@ -142,7 +142,86 @@ const Products = () => {
       description: "Powerful and loud flame machine.",
       image: "https://image.made-in-china.com/2f0j00vzoUnSiaJTqY/DJ-Party-Show-200W-Colorful-Firing-Machine-Stage-Effect-Fire-Flame-Machine.jpg"
     },
+  {
+      id: 3,
+      name: "co2-jets",
+      price: "10000$",
+      rating: 4.7,
+      description: "Beautiful CO2 jet effect.",
+      image: "https://tse4.mm.bing.net/th/id/OIP.H8SO6gvIrkrq3JE7XdKLlgHaHW?rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+      id: 4,
+      name: 'smoke-bubble-machines',
+      price: '4000$',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://m.media-amazon.com/images/I/71XRUGq9bBL._AC_SL1500_.jpg',
+      features: [
+        'Elegant golden display',
+        'Duration: 5 minutes',
+        'Creates a romantic ambiance',
+        'Perfect for weddings'
+      ]
+    },
+    {
+      id: 5,
+      name: 'co2-jumbo-paper-machines',
+      price: '12000$',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://5.imimg.com/data5/SELLER/Default/2022/10/KO/CL/NP/102604979/1663308629h06942b37ce214c7fb7de4af487c07ef5e-1000x1000.jpg',
+      features: [
+        'Elegant golden display',
+        'shots: 10',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+    {
+      id: 6,
+      name: 'co2-jet',
+      price: '8000$',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://tse3.mm.bing.net/th/id/OIP.4lLFDzNx3k0jSkkIeeQlDwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
+      features: [
+        'Elegant golden display',
+        'shots:6 to 8 ',
+        'Creates a romantic ambiance',
+        'Perfect for stage programs'
+      ]
+    },
+    {
+      id: 7,
+      name: 'cold-fires',
+      price: '800$',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://i.ytimg.com/vi/sykuhysgetY/maxresdefault.jpg',
+      features: [
+        'Elegant golden display',
+        'Duration: 30seconds',
+        'Creates a romantic ambiance',
+        'Perfect for weddings'
+      ]
+    },
+    {
+      id: 8,
+      name: 'smoke-gun',
+      price: '6000$',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://tse1.mm.bing.net/th/id/OIP.Loh9p4wds6L7ifFmwQu2uwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
   ];
+
 
   // Custom dateCellWrapper to make single-tap work on mobile
   const DateCellWrapper = ({ children, value }) => {
