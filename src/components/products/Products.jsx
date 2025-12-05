@@ -32,7 +32,7 @@ const Products = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [formData, setFormData] = useState({ name: "", email: "", occasion: "" });
+  const [formData, setFormData] = useState({ name: "", phone: "", occasion: "" });
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -97,7 +97,7 @@ const Products = () => {
 
       setEvents([...events, newEvent]);
 
-      if (formData.email) {
+      if (formData.phone) {
         sendEmail(selectedDate);
       }
 
@@ -115,7 +115,7 @@ const Products = () => {
     const emailData = {
       product: selectedProduct.name,
       name: formData.name,
-      email: formData.email,
+      phone: formData.phone,
       occasion: formData.occasion,
       booking_date: date.toLocaleDateString()
     };
@@ -195,7 +195,15 @@ const Products = () => {
             </div>
             <form onSubmit={handleFormSubmit} className="mt-4 space-y-3">
               <input type="text" required placeholder="Your Name" className="w-full border px-3 py-2 rounded" onChange={e => setFormData({ ...formData, name: e.target.value })} />
-              <input type="email" required placeholder="Your Email" className="w-full border px-3 py-2 rounded" onChange={e => setFormData({ ...formData, email: e.target.value })} />
+              <input 
+                type="tel" 
+                required 
+                placeholder="Your Phone Number" 
+                className="w-full border px-3 py-2 rounded" 
+                onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                pattern="[0-9]{10}"
+                title="Please enter a valid 10-digit phone number"
+              />
               <input type="text" required placeholder="Occasion" className="w-full border px-3 py-2 rounded" onChange={e => setFormData({ ...formData, occasion: e.target.value })} />
               <button className="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600">Submit</button>
             </form>
