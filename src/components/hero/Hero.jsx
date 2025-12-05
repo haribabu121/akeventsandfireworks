@@ -68,7 +68,10 @@ const Hero = () => {
         <div className="flex flex-wrap justify-center gap-6">
           <button 
             className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-yellow-500/30"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={(e) => {
+              e.preventDefault();
+              // No action, button is non-functional as requested
+            }}
           >
             Book Now
           </button>

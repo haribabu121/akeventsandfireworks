@@ -6,6 +6,33 @@ import { enUS } from "date-fns/locale/en-US";
 import emailjs from "emailjs-com";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
+// Touch handling styles component
+const TouchStyles = () => (
+  <style jsx global>{`
+    .rbc-day-bg {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .rbc-month-row {
+      touch-action: manipulation;
+    }
+    .rbc-day-slot {
+      touch-action: manipulation;
+    }
+  `}</style>
+);
+
+// Mobile touch handling styles
+const styles = `
+  .rbc-day-bg {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .rbc-month-row {
+    -webkit-tap-highlight-color: transparent;
+  }
+`;
+
 // Calendar localizer
 const localizer = dateFnsLocalizer({
   format,
@@ -71,67 +98,73 @@ const Products = () => {
     setShowCalendar(true);
   };
 
+  const processDateSelection = (slotInfo) => {
+    const selectedDate = new Date(slotInfo.start || slotInfo);
+    selectedDate.setHours(12, 0, 0, 0);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+      showAlert("Cannot book past dates.");
+      return;
+    }
+
+    const alreadyBooked = events.some(ev => {
+      const eventDate = new Date(ev.start);
+      eventDate.setHours(0, 0, 0, 0);
+      return eventDate.getTime() === selectedDate.getTime();
+    });
+
+    if (alreadyBooked) {
+      showAlert("This date is already booked!");
+      return;
+    }
+
+    if (window.confirm(`Confirm booking for ${selectedProduct?.name?.replace(/-/g, ' ')} on ${selectedDate.toDateString()}?`)) {
+      const newEvent = {
+        id: Date.now(),
+        title: `Booked: ${selectedProduct?.name}`,
+        start: selectedDate,
+        end: selectedDate,
+        allDay: true,
+        product: selectedProduct?.name
+      };
+
+      const updatedEvents = [...events, newEvent];
+      setEvents(updatedEvents);
+
+      if (formData.email) {
+        sendEmail(selectedDate);
+      }
+
+      showAlert(`Booking confirmed for ${selectedProduct?.name} on ${selectedDate.toDateString()}!`);
+
+      setTimeout(() => {
+        setShowCalendar(false);
+        setShowForm(false);
+      }, 100);
+    }
+  };
+
   const handleSelectSlot = (slotInfo) => {
-    // Prevent multiple rapid clicks
+    // For mobile, process immediately
+    if ('ontouchstart' in window) {
+      processDateSelection(slotInfo);
+      return;
+    }
+
+    // For desktop, use debounce logic
     if (window.touchTimer) {
       clearTimeout(window.touchTimer);
       window.touchTimer = null;
       return;
     }
 
-    // Set a small delay to prevent double-tap zoom from triggering the selection
     window.touchTimer = setTimeout(() => {
-      const selectedDate = new Date(slotInfo.start || slotInfo);
-      selectedDate.setHours(12, 0, 0, 0);
-
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
-      if (selectedDate < today) {
-        showAlert("Cannot book past dates.");
-        return;
-      }
-
-      const alreadyBooked = events.some(ev => {
-        const eventDate = new Date(ev.start);
-        eventDate.setHours(0, 0, 0, 0);
-        return eventDate.getTime() === selectedDate.getTime();
-      });
-
-      if (alreadyBooked) {
-        showAlert("This date is already booked!");
-        return;
-      }
-
-      // Show confirmation dialog
-      if (window.confirm(`Confirm booking for ${selectedProduct?.name?.replace(/-/g, ' ')} on ${selectedDate.toDateString()}?`)) {
-        const newEvent = {
-          id: Date.now(),
-          title: `Booked: ${selectedProduct?.name}`,
-          start: selectedDate,
-          end: selectedDate,
-          allDay: true,
-          product: selectedProduct?.name
-        };
-
-        const updatedEvents = [...events, newEvent];
-        setEvents(updatedEvents);
-
-        if (formData.email) {
-          sendEmail(selectedDate);
-        }
-
-        showAlert(`Booking confirmed for ${selectedProduct?.name} on ${selectedDate.toDateString()}!`);
-
-        // Small delay before closing to ensure alert is shown
-        setTimeout(() => {
-          setShowCalendar(false);
-          setShowForm(false);
-        }, 100);
-      }
-      
+      processDateSelection(slotInfo);
       window.touchTimer = null;
-    }, 200); // 200ms delay to handle touch events
+    }, 50);
   };
 
   const sendEmail = (date) => {
@@ -173,8 +206,79 @@ const Products = () => {
       rating: 4.7,
       description: "Beautiful CO2 jet effect.",
       image: "https://tse4.mm.bing.net/th/id/OIP.H8SO6gvIrkrq3JE7XdKLlgHaHW?rs=1&pid=ImgDetMain&o=7&rm=3"
-    }
+    },
+    {
+      id: 4,
+      name: 'smoke-bubble-machines',
+      price: '4000$',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://m.media-amazon.com/images/I/71XRUGq9bBL._AC_SL1500_.jpg',
+      features: [
+        'Elegant golden display',
+        'Duration: 5 minutes',
+        'Creates a romantic ambiance',
+        'Perfect for weddings'
+      ]
+    },
+    {
+      id: 5,
+      name: 'co2-jumbo-paper-machines',
+      price: '12000$',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://5.imimg.com/data5/SELLER/Default/2022/10/KO/CL/NP/102604979/1663308629h06942b37ce214c7fb7de4af487c07ef5e-1000x1000.jpg',
+      features: [
+        'Elegant golden display',
+        'shots: 10',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+    {
+      id: 6,
+      name: 'co2-jet',
+      price: '8000$',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://tse3.mm.bing.net/th/id/OIP.4lLFDzNx3k0jSkkIeeQlDwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
+      features: [
+        'Elegant golden display',
+        'shots:6 to 8 ',
+        'Creates a romantic ambiance',
+        'Perfect for stage programs'
+      ]
+    },
+    {
+      id: 7,
+      name: 'cold-fires',
+      price: '800$',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://i.ytimg.com/vi/sykuhysgetY/maxresdefault.jpg',
+      features: [
+        'Elegant golden display',
+        'Duration: 30seconds',
+        'Creates a romantic ambiance',
+        'Perfect for weddings'
+      ]
+    },
+    {
+      id: 8,
+      name: 'smoke-gun',
+      price: '6000$',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://tse1.mm.bing.net/th/id/OIP.Loh9p4wds6L7ifFmwQu2uwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
   ];
+
 
   return (
     <section id="products" className="py-20 bg-gray-50">
@@ -236,22 +340,33 @@ const Products = () => {
               onSelectSlot={handleSelectSlot}
               components={{
                 toolbar: CustomToolbar,
-                // Add touch tap handler for better mobile support
-                dateCellWrapper: ({ children, value }) => (
-                  <div 
-                    className="rbc-day-bg" 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleSelectSlot({ start: value });
-                    }}
-                    style={{
-                      height: '100%',
-                      WebkitTapHighlightColor: 'transparent'
-                    }}
-                  >
-                    {children}
-                  </div>
-                )
+                dateCellWrapper: ({ children, value }) => {
+                  const handleInteraction = (e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    handleSelectSlot({ start: value, nativeEvent: e });
+                    return false;
+                  };
+
+                  return (
+                    <div 
+                      className="rbc-day-bg"
+                      onTouchStart={handleInteraction}
+                      onClick={handleInteraction}
+                      onTouchEnd={(e) => e.preventDefault()}
+                      style={{
+                        height: '100%',
+                        touchAction: 'manipulation',
+                        WebkitTapHighlightColor: 'transparent',
+                        msTouchAction: 'manipulation',
+                        WebkitUserSelect: 'none',
+                        userSelect: 'none'
+                      }}
+                    >
+                      {children}
+                    </div>
+                  );
+                }
               }}
               defaultView={Views.MONTH}
               views={[Views.MONTH]}
