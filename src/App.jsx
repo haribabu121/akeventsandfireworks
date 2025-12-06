@@ -17,7 +17,8 @@ import GrandEntry from './components/services/details/GrandEntry';
 import VenueDecoration from './components/services/details/VenueDecoration';
 import Fireworks from './components/services/details/Fireworks';
 import SoundLightVisual from './components/services/details/SoundLightVisual';
-
+import ItemSelection from './components/booking/ItemSelection';
+// import ThankYou from "./ThankYou";
 function App() {
   return (
     <Router>
@@ -44,6 +45,19 @@ function App() {
                 <Footer />
               </div>
             } />
+            <Route path="/events" element={
+              <div className="bg-gray-50">
+                <EventsPage />
+                <Footer />
+              </div>
+            } />
+            <Route path="/select-items" element={
+              <div className="bg-gray-50 min-h-screen">
+                <ItemSelection />
+                <Footer />
+              </div>
+            } />
+            
             <Route path="/services/cloud-effects" element={
               <div className="bg-gray-50">
                 <CloudEffects />
@@ -85,7 +99,14 @@ function App() {
                 <EventsPage />
                 <Footer />
               </div>
+              
             } />
+            {/* <Route path="/select-items" element={
+              <div className="bg-gray-50">
+                <ItemSelectionPage />
+                <Footer />
+              </div> */}
+            {/* } /> */}
           </Routes>
         </main>
       </div>

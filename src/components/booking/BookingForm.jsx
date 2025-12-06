@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const BookingForm = ({ onClose }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,7 +12,7 @@ const BookingForm = ({ onClose }) => {
     occasion: '',
     otherOccasion: '',
     location: '',
-    eventType: 'indoor',
+    eventType: 'select event type',
     date: '',
     time: '',
     guests: 1,
@@ -40,45 +42,23 @@ const BookingForm = ({ onClose }) => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('http://localhost:3001/api/bookings', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit booking');
-      }
-
+      // For demo purposes, we'll simulate an API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Show success message
       toast.success('Booking submitted successfully!', {
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
       });
 
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        mobileNo: '',
-        occasion: '',
-        location: '',
-        eventType: 'indoor',
-        date: '',
-        time: '',
-        // guests: 1,
-        additionalNotes: ''
-      });
-
-      // Close modal after successful submission
+      // Navigate to item selection page after a short delay
       setTimeout(() => {
-        onClose();
-      }, 2000);
+        navigate('/select-items', { state: { formData } });
+      }, 1500);
 
     } catch (error) {
       console.error('Error submitting booking:', error);
@@ -329,6 +309,7 @@ const BookingForm = ({ onClose }) => {
                 required
                 disabled={isSubmitting}
               >
+                <option value="">Select event type</option>
                 <option value="indoor">Indoor</option>
                 <option value="outdoor">Outdoor</option>
               </select>
