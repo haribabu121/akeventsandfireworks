@@ -403,9 +403,9 @@ const NavbarContent = () => {
               {/* <li className="p-2 hover:bg-green-100 flex items-center gap-2" onClick={() => scrollToSection("collaboration")}>
                 <FaHandshake /> Collaboration
               </li> */}
-              <li className="p-2 hover:bg-green-100 flex items-center gap-2" onClick={() => scrollToSection("testimonials")}>
+              {/* <li className="p-2 hover:bg-green-100 flex items-center gap-2" onClick={() => scrollToSection("testimonials")}>
                 <FaStar /> Customer Reviews
-              </li>
+              </li> */}
               <li className="p-2 hover:bg-green-100 flex items-center gap-2" onClick={() => scrollToSection("faq")}>
                 <FaBookOpen /> FAQs
               </li>
