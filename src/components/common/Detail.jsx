@@ -21,7 +21,7 @@ const Detail = () => {
           className="absolute right-3 top-3 bg-white rounded-full w-6 h-6 flex items-center justify-center shadow-md hover:bg-gray-100 focus:outline-none"
           aria-label="Close banner"
         >
-          <FaTimes className="h-4 w-4 text-gray-600" />
+          <FaTimes className="h-4 w-4" />
         </button>
         <Marquee items={announcements} speed={25} className="py-3 pr-12" />
       </div>

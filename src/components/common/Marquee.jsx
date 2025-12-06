@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Marquee = ({ items, speed = 20 }) => {
+const Marquee = ({ items, speed = 20, className = "" }) => {
+  const [isPaused, setIsPaused] = useState(false);
+
   return (
-    <div className="overflow-hidden whitespace-nowrap w-full bg-yellow-500 text-white py-2 relative">
+    <div 
+      className={`overflow-hidden whitespace-nowrap w-full bg-yellow-500 text-white py-2 relative ${className}`}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div
-        className="inline-block animate-marquee"
-        style={{ animationDuration: `${speed}s` }}
+        className="inline-block"
+        style={{ 
+          animation: `marquee ${speed}s linear infinite`,
+          animationPlayState: isPaused ? 'paused' : 'running',
+          paddingRight: '0.5rem'
+        }}
       >
         {items.map((item, index) => (
           <span key={index} className="mx-6 inline-flex items-center">
@@ -19,10 +29,6 @@ const Marquee = ({ items, speed = 20 }) => {
         @keyframes marquee {
           0% { transform: translateX(100%); }
           100% { transform: translateX(-100%); }
-        }
-        .animate-marquee {
-          display: inline-block;
-          animation: marquee linear infinite;
         }
       `}</style>
     </div>
