@@ -1,7 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import heroVideo from './hero.mp4';
+import BookingForm from '../booking/BookingForm';
 
 const Hero = () => {
+  const [showBookingForm, setShowBookingForm] = useState(false);
   const videoRef = useRef(null);
 
   // Ensure video plays properly on mobile devices
@@ -70,7 +72,7 @@ const Hero = () => {
             className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-4 px-10 rounded-full text-lg transition-all duration-300 transform hover:scale-105 cursor-pointer shadow-lg hover:shadow-yellow-500/30"
             onClick={(e) => {
               e.preventDefault();
-              // No action, button is non-functional as requested
+              setShowBookingForm(true);
             }}
           >
             Book Now
@@ -100,6 +102,19 @@ const Hero = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
       </div>
+
+      {/* Booking Form Modal */}
+      {showBookingForm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div 
+            className="absolute inset-0 bg-black bg-opacity-50"
+            onClick={() => setShowBookingForm(false)}
+          ></div>
+          <div className="relative z-10 w-full max-w-md mx-4">
+            <BookingForm onClose={() => setShowBookingForm(false)} />
+          </div>
+        </div>
+      )}
     </section>
   );
 };
