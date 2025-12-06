@@ -31,17 +31,53 @@ import {
   FaFire,
   FaMusic,
   FaFireAlt,
-  FaWind,
   FaPaperPlane,
   FaBolt,
   FaSnowflake,
-  FaSmog
+  FaSmog,
+  FaWind
 } from "react-icons/fa";
-import { GiSparkles, GiFlowers } from "react-icons/gi";
+import { GiSparkles, GiFlowers, GiFireworkRocket } from "react-icons/gi";
 
 import Logo from './Logo.png';
 
+const MarqueeText = () => (
+  <div className="bg-yellow-500 text-white py-2 overflow-hidden w-full z-50 relative">
+    <div className="whitespace-nowrap w-max">
+      <div className="inline-block animate-marquee whitespace-nowrap px-4">
+        <span className="mx-4 font-medium"><FaStar className="inline mr-2" />🎉 Special discount on wedding packages this month!</span>
+        <span className="mx-4 font-medium"><GiFireworkRocket className="inline mr-2" />✨ Book your event now and get 10% off on all services</span>
+        <span className="mx-4 font-medium"><FaFireAlt className="inline mr-2" />🔥 Limited time offer: Free decoration with every booking</span>
+      </div>
+    </div>
+    <style jsx>{`
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .animate-marquee {
+        display: inline-block;
+        animation: marquee 20s linear infinite;
+      }
+      @media (max-width: 768px) {
+        .animate-marquee {
+          animation-duration: 30s;
+        }
+      }
+    `}</style>
+  </div>
+);
+
 const Navbar = () => {
+  return (
+    <div className="fixed top-0 left-0 w-full z-40">
+      <MarqueeText />
+      <NavbarContent />
+    </div>
+  );
+};
+
+const NavbarContent = () => {
   const [showProducts, setShowProducts] = useState(false);
   const [showServices, setShowServices] = useState(false);
   const [showAbout, setShowAbout] = useState(false);

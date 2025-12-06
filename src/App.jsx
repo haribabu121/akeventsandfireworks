@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Detail from './components/common/Detail';
 import Navbar from './Navbar/Navbar';
 import Hero from './components/hero/Hero';
 import Products from './components/products/Products';
@@ -19,10 +20,12 @@ import Fireworks from './components/services/details/Fireworks';
 import SoundLightVisual from './components/services/details/SoundLightVisual';
 import ItemSelection from './components/booking/ItemSelection';
 import ThankYou from './components/booking/ThankYou';
+// import AnnouncementBar from './components/common/AnnoucementBar';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen">
+      <div className="min-h-screen pb-24">
+        {/* <AnnouncementBar/> */}
         <Navbar />
         <main className="pt-16">
           <Routes>
@@ -114,6 +117,7 @@ function App() {
             } />
           </Routes>
         </main>
+        <Detail />
       </div>
     </Router>
   );
