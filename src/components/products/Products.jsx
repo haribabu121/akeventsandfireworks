@@ -241,7 +241,14 @@ const Products = () => {
   return (
     <section id="products" className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
-        <h1 className="text-4xl text-center font-bold mb-10">Our Products</h1>
+        <div className="text-center mb-10">
+          <div className="group">
+            <h1 className="text-4xl font-bold text-center mb-4 group-hover:text-yellow-500 transition-colors duration-300">Our Products</h1>
+            <div className="group relative">
+              <div className="w-24 h-1.5 mx-auto transform origin-left transition-all duration-500 group-hover:scale-x-125 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 bg-size-200 group-hover:bg-pos-0 bg-pos-100"></div>
+            </div>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
