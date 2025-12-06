@@ -18,7 +18,7 @@ import VenueDecoration from './components/services/details/VenueDecoration';
 import Fireworks from './components/services/details/Fireworks';
 import SoundLightVisual from './components/services/details/SoundLightVisual';
 import ItemSelection from './components/booking/ItemSelection';
-// import ThankYou from "./ThankYou";
+import ThankYou from './components/booking/ThankYou';
 function App() {
   return (
     <Router>
@@ -106,7 +106,12 @@ function App() {
                 <ItemSelectionPage />
                 <Footer />
               </div> */}
-            {/* } /> */}
+            <Route path="/thank-you" element={
+              <div className="bg-yellow-50 min-h-screen">
+                <ThankYou />
+                <Footer />
+              </div>
+            } />
           </Routes>
         </main>
       </div>
