@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    // Open Instagram in a new tab
+    window.open('https://www.instagram.com/akeventsandfireworks', '_blank');
+    // Update subscription status to show 'Subscribed'
+    setIsSubscribed(true);
+    
+    // Revert back to 'Subscribe Now' after 3 seconds
+    setTimeout(() => {
+      setIsSubscribed(false);
+    }, 3000);
+  };
   return (
     <footer className="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
       <div className="container mx-auto px-6">
@@ -39,23 +54,27 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-semibold mb-4">Newsletter</h4>
             <p className="text-sm mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
-            <form className="flex">
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
-                className="px-4 py-2 rounded-l-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 w-full"
-              />
+            <form onSubmit={handleSubscribe} className="flex flex-col space-y-2">
+              <div className="flex items-center">
+                <FaInstagram className="mr-2 text-pink-500 text-xl" />
+                <span>Follow us on Instagram</span>
+              </div>
               <button 
                 type="submit" 
-                className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded-r-md transition-colors"
+                className={`flex items-center justify-center space-x-2 font-semibold px-4 py-2 rounded-md transition-all duration-300 ${
+                  isSubscribed 
+                    ? 'bg-green-500 text-white transform scale-105' 
+                    : 'bg-yellow-500 hover:bg-yellow-600 text-black hover:shadow-md'
+                }`}
               >
-                Subscribe
+                {isSubscribed ? '✓ Subscribed!' : 'Subscribe Now'}
               </button>
             </form>
           </div>
         </div>
         <div className="border-t border-white-100 mt-12 pt-8 text-sm text-center">
           <p>&copy; {new Date().getFullYear()} AK Events & Fireworks. All rights reserved.</p>
+          <p className="mt-2 text-xs text-gray-500">Follow us on Instagram @akeventsandfireworks</p>
         </div>
       </div>
     </footer>
