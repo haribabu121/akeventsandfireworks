@@ -1,7 +1,17 @@
 import React, { useState } from "react";
+import { FaTimes } from 'react-icons/fa';
 
-const Marquee = ({ items, speed = 20, className = "" }) => {
+const Marquee = ({ items, speed = 20, className = "", onClose }) => {
   const [isPaused, setIsPaused] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+
+  const handleClose = (e) => {
+    e.stopPropagation();
+    setIsVisible(false);
+    if (onClose) onClose();
+  };
+
+  if (!isVisible) return null;
 
   return (
     <div 
@@ -9,6 +19,13 @@ const Marquee = ({ items, speed = 20, className = "" }) => {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
+      <button 
+        onClick={handleClose}
+        className="absolute right-2 top-1/2 -translate-y-1/2 text-white hover:text-gray-200 focus:outline-none z-10"
+        aria-label="Close marquee"
+      >
+        <FaTimes className="w-4 h-4" />
+      </button>
       <div
         className="inline-block"
         style={{ 

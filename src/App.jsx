@@ -20,12 +20,11 @@ import Fireworks from './components/services/details/Fireworks';
 import SoundLightVisual from './components/services/details/SoundLightVisual';
 import ItemSelection from './components/booking/ItemSelection';
 import ThankYou from './components/booking/ThankYou';
-// import AnnouncementBar from './components/common/AnnoucementBar';
+
 function App() {
   return (
     <Router>
       <div className="min-h-screen pb-24">
-        {/* <AnnouncementBar/> */}
         <Navbar />
         <main className="pt-16">
           <Routes>
