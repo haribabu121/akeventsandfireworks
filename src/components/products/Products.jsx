@@ -14,6 +14,42 @@ const localizer = dateFnsLocalizer({
   locales: { "en-US": enUS },
 });
 
+// Custom styles for mobile responsiveness
+const calendarStyles = `
+  .rbc-calendar {
+    min-height: 300px;
+    max-height: 80vh;
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .rbc-toolbar {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .rbc-toolbar .rbc-toolbar-label {
+      margin: 10px 0;
+      text-align: center;
+    }
+    
+    .rbc-header {
+      padding: 8px 3px;
+      font-size: 0.8em;
+    }
+    
+    .rbc-date-cell {
+      padding: 4px 2px;
+      font-size: 0.8em;
+    }
+    
+    .rbc-toolbar button {
+      padding: 5px 8px;
+      font-size: 0.8em;
+    }
+  }
+`;
+
 const CustomToolbar = ({ label, onNavigate }) => (
   <div className="rbc-toolbar flex items-center justify-between mb-3">
     <button className="rbc-btn" onClick={() => onNavigate("TODAY")}>Today</button>
@@ -327,31 +363,59 @@ const Products = () => {
         </div>
       )}
 
+      {/* Add custom styles */}
+      <style>{calendarStyles}</style>
+      
       {/* ---------------- CALENDAR POPUP ---------------- */}
       {showCalendar && (
-        <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50 p-4">
-          <div className="bg-white w-full max-w-4xl p-4 rounded-lg shadow-lg">
-
-            <div className="flex justify-between mb-2">
-              <h3 className="text-xl font-bold">Select Date</h3>
-              <FaTimes className="cursor-pointer" onClick={() => setShowCalendar(false)} />
+        <div 
+          className="fixed inset-0 bg-black/60 flex justify-center items-center z-50 p-4 overflow-auto"
+          onClick={(e) => e.target === e.currentTarget && setShowCalendar(false)}
+        >
+          <div className="bg-white w-full max-w-4xl p-4 rounded-lg shadow-lg mx-2">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-bold">Select Date for {selectedProduct?.name?.replace(/-/g, ' ')}</h3>
+              <button 
+                onClick={() => setShowCalendar(false)}
+                className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                aria-label="Close calendar"
+              >
+                <FaTimes className="text-xl" />
+              </button>
             </div>
 
-            <Calendar
-              date={currentDate}
-              onNavigate={(date) => setCurrentDate(date)}
-              localizer={localizer}
-              events={events}
-              selectable
-              startAccessor="start"
-              endAccessor="end"
-              onSelectSlot={handleSelectSlot}
-              components={{ toolbar: CustomToolbar }}
-              defaultView={Views.MONTH}
-              views={[Views.MONTH]}
-              style={{ minHeight: "300px", maxHeight: "80vh" }}
-            />
-
+            <div className="overflow-x-auto">
+              <Calendar
+                date={currentDate}
+                onNavigate={(date) => setCurrentDate(date)}
+                localizer={localizer}
+                events={events}
+                selectable
+                startAccessor="start"
+                endAccessor="end"
+                onSelectSlot={handleSelectSlot}
+                components={{
+                  toolbar: (props) => (
+                    <CustomToolbar 
+                      {...props} 
+                      onNavigate={props.onNavigate} 
+                      label={props.label} 
+                    />
+                  )
+                }}
+                defaultView={Views.MONTH}
+                views={[Views.MONTH]}
+                className="rbc-calendar"
+                popup
+                onTouchStart={(e) => e.stopPropagation()}
+                onTouchMove={(e) => e.stopPropagation()}
+                onTouchEnd={(e) => e.stopPropagation()}
+              />
+            </div>
+            
+            <div className="mt-4 text-center text-sm text-gray-600">
+              <p>Click on a date to book your event</p>
+            </div>
           </div>
         </div>
       )}
