@@ -20,32 +20,61 @@ const calendarStyles = `
     min-height: 300px;
     max-height: 80vh;
     width: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .rbc-day-bg {
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+  
+  .rbc-day-slot .rbc-event, 
+  .rbc-day-slot .rbc-background-event {
+    pointer-events: none;
   }
   
   @media (max-width: 768px) {
     .rbc-toolbar {
       flex-direction: column;
       gap: 10px;
+      padding: 5px;
     }
     
     .rbc-toolbar .rbc-toolbar-label {
       margin: 10px 0;
       text-align: center;
+      font-size: 1.1em;
     }
     
     .rbc-header {
       padding: 8px 3px;
       font-size: 0.8em;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     
     .rbc-date-cell {
-      padding: 4px 2px;
-      font-size: 0.8em;
+      padding: 8px 2px;
+      font-size: 0.9em;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     .rbc-toolbar button {
-      padding: 5px 8px;
-      font-size: 0.8em;
+      padding: 8px 12px;
+      font-size: 0.9em;
+      border-radius: 4px;
+      margin: 2px;
+    }
+    
+    .rbc-month-view {
+      height: auto !important;
+    }
+    
+    .rbc-month-row {
+      min-height: 80px;
     }
   }
 `;
@@ -114,18 +143,24 @@ const Products = () => {
    * DATE SELECTION / BOOKING
    * ------------------------- */
   const processDateSelection = (date) => {
+    if (!date) return;
+    
+    // Create date objects and normalize them to start of day for accurate comparison
     const selectedDate = new Date(date);
-    selectedDate.setHours(12, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    if (selectedDate < today) {
+    // Compare dates without time
+    if (selectedDate.getTime() < today.getTime()) {
       showAlert("Cannot book past dates.");
       return;
     }
 
+    // Check if date is already booked
     const alreadyBooked = events.some(ev => {
+      if (!ev.start) return false;
       const eventDate = new Date(ev.start);
       eventDate.setHours(0, 0, 0, 0);
       return eventDate.getTime() === selectedDate.getTime();
@@ -155,8 +190,13 @@ const Products = () => {
     }
   };
 
-  const handleSelectSlot = ({ start }) => {
-    processDateSelection(start);
+  const handleSelectSlot = (slotInfo) => {
+    if (!slotInfo || !slotInfo.start) return;
+    
+    // Add a small delay to ensure the touch event is fully processed
+    setTimeout(() => {
+      processDateSelection(slotInfo.start);
+    }, 50);
   };
 
   /** ---------------------------
@@ -401,6 +441,13 @@ const Products = () => {
                       onNavigate={props.onNavigate} 
                       label={props.label} 
                     />
+                  ),
+                  dateCellWrapper: (props) => (
+                    <div 
+                      {...props}
+                      className="rbc-day-bg"
+                      onClick={() => handleSelectSlot({ start: props.value })}
+                    />
                   )
                 }}
                 defaultView={Views.MONTH}
@@ -410,6 +457,10 @@ const Products = () => {
                 onTouchStart={(e) => e.stopPropagation()}
                 onTouchMove={(e) => e.stopPropagation()}
                 onTouchEnd={(e) => e.stopPropagation()}
+                longPressThreshold={100}
+                selectable={true}
+                onSelecting={() => true}
+                onSelectEvent={() => {}}
               />
             </div>
             
