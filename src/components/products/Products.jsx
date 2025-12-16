@@ -34,6 +34,7 @@ const Products = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [formData, setFormData] = useState({ name: "", phone: "", occasion: "" });
   const [events, setEvents] = useState([]);
+  const [emailSent, setEmailSent] = useState(false); // <-- NEW: prevent duplicate email
 
   // Load saved bookings
   useEffect(() => {
@@ -55,11 +56,12 @@ const Products = () => {
 
   const handleBookNow = (product) => {
     setSelectedProduct(product);
+    setEmailSent(false); // reset email flag for new booking
     setShowForm(true);
   };
 
   /** -------------------------
-   * FORM SUBMIT (UPDATED)
+   * FORM SUBMIT
    * ------------------------- */
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -127,7 +129,7 @@ const Products = () => {
    * EMAIL SEND (ONLY ONCE)
    * --------------------------- */
   const sendEmail = (date) => {
-    if (!selectedProduct) return;
+    if (emailSent || !selectedProduct) return; // <-- prevent duplicates
 
     const emailData = {
       product: selectedProduct.name,
@@ -139,7 +141,10 @@ const Products = () => {
 
     emailjs
       .send("service_80on2il", "template_wflm9wo", emailData, "JSypFwbJbZ8zqx-hf")
-      .then(() => console.log("Email sent successfully"))
+      .then(() => {
+        console.log("Email sent successfully");
+        setEmailSent(true); // <-- mark as sent
+      })
       .catch(err => console.error("EmailJS Error:", err));
   };
 
@@ -150,7 +155,7 @@ const Products = () => {
     {
       id: 1,
       name: "sparkcular-machines",
-      price: "10,000$",
+      price: "10,000",
       rating: 4.8,
       description: "A stunning display of colorful sparks.",
       image: "https://tse4.mm.bing.net/th/id/OIP.i95cp4GA8-t8ZDRlzmkowwHaGS"
@@ -158,7 +163,7 @@ const Products = () => {
     {
       id: 2,
       name: "fire-flame-machines",
-      price: "6000$",
+      price: "6000",
       rating: 4.9,
       description: "Powerful flame machine with strong visuals.",
       image: "https://image.made-in-china.com/2f0j00vzoUnSiaJTqY/DJ-Party-Show-200W-Colorful-Firing-Machine-Stage-Effect-Fire-Flame-Machine.jpg"
@@ -166,7 +171,7 @@ const Products = () => {
     {
       id: 3,
       name: "co2-jets",
-      price: "10000$",
+      price: "10000",
       rating: 4.7,
       description: "Beautiful CO2 jet effect.",
       image: "https://tse4.mm.bing.net/th/id/OIP.H8SO6gvIrkrq3JE7XdKLlgHaHW"
@@ -174,7 +179,7 @@ const Products = () => {
     {
       id: 4,
       name: "smoke-bubble-machines",
-      price: "4000$",
+      price: "4000",
       rating: 4.7,
       description: "Perfect for weddings and events.",
       image: "https://m.media-amazon.com/images/I/71XRUGq9bBL.jpg"
@@ -182,7 +187,7 @@ const Products = () => {
     {
       id: 5,
       name: 'co2-jumbo-paper-machines',
-      price: '12000$',
+      price: '12000',
       rating: 4.7,
       description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
       image: 'https://5.imimg.com/data5/SELLER/Default/2022/10/KO/CL/NP/102604979/1663308629h06942b37ce214c7fb7de4af487c07ef5e-1000x1000.jpg',
@@ -196,7 +201,7 @@ const Products = () => {
     {
       id: 6,
       name: 'co2-jet',
-      price: '8000$',
+      price: '8000',
       rating: 4.7,
       description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
       image: 'https://tse3.mm.bing.net/th/id/OIP.4lLFDzNx3k0jSkkIeeQlDwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
@@ -210,7 +215,7 @@ const Products = () => {
     {
       id: 7,
       name: 'cold-fires',
-      price: '800$',
+      price: '800',
       rating: 4.7,
       description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
       image: 'https://i.ytimg.com/vi/sykuhysgetY/maxresdefault.jpg',
@@ -224,7 +229,7 @@ const Products = () => {
     {
       id: 8,
       name: 'smoke-gun',
-      price: '6000$',
+      price: '6000',
       rating: 4.7,
       description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
       image: 'https://tse1.mm.bing.net/th/id/OIP.Loh9p4wds6L7ifFmwQu2uwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
@@ -236,7 +241,6 @@ const Products = () => {
       ]
     },
   ];
-
 
   return (
     <section id="products" className="py-20 bg-gray-50">
@@ -281,18 +285,16 @@ const Products = () => {
         </div>
       </div>
 
-      {/* ---------------- FORM POPUP ---------------- */}
+      {/* FORM POPUP */}
       {showForm && (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
           <div className="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
-
             <div className="flex justify-between items-center">
               <h3 className="text-xl font-bold">Enter Details</h3>
               <FaTimes className="cursor-pointer" onClick={() => setShowForm(false)} />
             </div>
 
             <form onSubmit={handleFormSubmit} className="mt-4 space-y-3">
-
               <input
                 type="text"
                 required
@@ -300,7 +302,6 @@ const Products = () => {
                 className="w-full border px-3 py-2 rounded"
                 onChange={e => setFormData({ ...formData, name: e.target.value })}
               />
-
               <input
                 type="tel"
                 required
@@ -309,7 +310,6 @@ const Products = () => {
                 pattern="[0-9]{10}"
                 onChange={e => setFormData({ ...formData, phone: e.target.value })}
               />
-
               <input
                 type="text"
                 required
@@ -322,16 +322,14 @@ const Products = () => {
                 Submit
               </button>
             </form>
-
           </div>
         </div>
       )}
 
-      {/* ---------------- CALENDAR POPUP ---------------- */}
+      {/* CALENDAR POPUP */}
       {showCalendar && (
         <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50 p-4">
           <div className="bg-white w-full max-w-4xl p-4 rounded-lg shadow-lg">
-
             <div className="flex justify-between mb-2">
               <h3 className="text-xl font-bold">Select Date</h3>
               <FaTimes className="cursor-pointer" onClick={() => setShowCalendar(false)} />
@@ -351,7 +349,6 @@ const Products = () => {
               views={[Views.MONTH]}
               style={{ minHeight: "300px", maxHeight: "80vh" }}
             />
-
           </div>
         </div>
       )}

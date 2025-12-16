@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaFacebook, FaWhatsapp, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { 
+  FaMapMarkerAlt, FaPhone, FaEnvelope, 
+  FaFacebook, FaWhatsapp, FaInstagram, FaYoutube 
+} from 'react-icons/fa';
 import axios from 'axios';
 
 const Contact = () => {
@@ -30,20 +33,12 @@ const Contact = () => {
       const response = await axios.post(
         "http://localhost:5000/api/connect",
         formData,
-        {
-          headers: { "Content-Type": "application/json" }
-        }
+        { headers: { "Content-Type": "application/json" } }
       );
 
       if (response.data.success) {
         setSubmitStatus("success");
-        // Reset Form
-        setFormData({
-          name: "",
-          email: "",
-          subject: "",
-          message: ""
-        });
+        setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
         setSubmitStatus("error");
       }
@@ -56,34 +51,29 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-900 text-white">
+    <section id="contact" className="py-8 bg-gray-900 text-white">
       <div className="container mx-auto px-6">
 
-        {/* HEADER */}
-        <div className="text-center mb-16">
-          <div className="group">
-            <h2 className="text-4xl font-bold mb-4 group-hover:text-yellow-500 transition-colors duration-300">
-              Get In Touch
-            </h2>
-            <div className="group relative">
-              <div className="w-24 h-1.5 mx-auto transform origin-left transition-all duration-500 group-hover:scale-x-125 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 bg-size-200 group-hover:bg-pos-0 bg-pos-100"></div>
-            </div>
-          </div>
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h2 className="text-4xl font-bold mb-4 group-hover:text-yellow-500 transition-colors duration-300">
+            Get In Touch
+          </h2>
+          <div className="w-24 h-1.5 mx-auto bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500"></div>
         </div>
 
-        {/* GRID */}
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-8">
 
-          {/* LEFT SIDE - CONTACT INFO */}
+          {/* Contact Info */}
           <div>
             <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
-            <p className="text-gray-300 mb-8">
-              Ready to light up your next event? Contact us today to discuss your requirements and get a free quote.
+            <p className="text-gray-300 mb-6">
+              Ready to light up your next event? Contact us today to discuss your requirements!
             </p>
 
-            <div className="space-y-6">
-              {/* Location */}
-              <div className="flex items-start">
+            <div className="space-y-4">
+
+              <div className="flex items-start mb-4">
                 <FaMapMarkerAlt className="text-yellow-500 text-xl mt-1 mr-4" />
                 <div>
                   <h4 className="font-semibold">Our Location</h4>
@@ -91,8 +81,7 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Phone */}
-              <div className="flex items-center">
+              <div className="flex items-center mb-4">
                 <FaPhone className="text-yellow-500 text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">Phone</h4>
@@ -100,54 +89,45 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Email */}
-              <div className="flex items-center">
+              <div className="flex items-center mb-4">
                 <FaEnvelope className="text-yellow-500 text-xl mr-4" />
                 <div>
                   <h4 className="font-semibold">Email</h4>
                   <p className="text-gray-400">akeventsandfireworks@gmail.com</p>
                 </div>
               </div>
+
             </div>
 
-            {/* SOCIAL LINKS */}
             <div className="mt-8">
               <h4 className="font-semibold mb-4">Follow Us</h4>
               <div className="flex space-x-4">
+                <a href="https://www.facebook.com/profile.php?id=61584294129668" target="_blank" rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-colors">
+                  <FaFacebook className="text-xl" />
+                </a>
 
-                {[
-                  { name: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61584294129668' },
-                  { name: 'Whatsapp', url: 'https://whatsapp.com/channel/0029VbBCCipHltYDmRN5vN3x' },
-                  { name: 'Instagram', url: 'https://www.instagram.com/akeventsandfireworks?igsh=MTBwdnk4djgzMXYxcw%3D%3D' },
-                  { name: 'YouTube', url: 'https://www.youtube.com/channel/UCWyyejavZ6iWPAX0MFlgKzw' }
-                ].map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-colors"
-                    aria-label={social.name}
-                  >
-                    {social.name === 'Facebook' ? (
-                      <FaFacebook className="text-xl" />
-                    ) : social.name === 'Whatsapp' ? (
-                      <FaWhatsapp className="text-xl" />
-                    ) : social.name === 'Instagram' ? (
-                      <FaInstagram className="text-xl" />
-                    ) : social.name === 'YouTube' ? (
-                      <FaYoutube className="text-xl" />
-                    ) : (
-                      social.name.charAt(0)
-                    )}
-                  </a>
-                ))}
+                <a href="https://whatsapp.com/channel/0029VbBCCipHltYDmRN5vN3x" target="_blank" rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-colors">
+                  <FaWhatsapp className="text-xl" />
+                </a>
+
+                <a href="https://www.instagram.com/akeventsandfireworks" target="_blank" rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-colors">
+                  <FaInstagram className="text-xl" />
+                </a>
+
+                <a href="https://www.youtube.com/channel/UCWyyejavZ6iWPAX0MFlgKzw" target="_blank" rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-yellow-500 hover:text-black transition-colors">
+                  <FaYoutube className="text-xl" />
+                </a>
               </div>
             </div>
           </div>
 
-          {/* RIGHT SIDE - CONTACT FORM */}
+          {/* Form */}
           <div>
+
             {submitStatus === "success" && (
               <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-md">
                 Thank you for your message! We'll get back to you soon.
@@ -156,82 +136,50 @@ const Contact = () => {
 
             {submitStatus === "error" && (
               <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-md">
-                There was an error sending your message. Please try again later.
+                Error sending your message. Please try again.
               </div>
             )}
 
-            {/* FORM */}
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* name and email */}
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-1">Your Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 text-white rounded-md focus:ring-2 focus:ring-yellow-500"
-                    placeholder="Enter your name"
-                    required
-                  />
+                  <input type="text" id="name" required
+                    value={formData.name} onChange={handleChange}
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 text-white rounded-md" />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 text-white rounded-md focus:ring-2 focus:ring-yellow-500"
-                    placeholder="Enter your email"
-                    required
-                  />
+                  <input type="email" id="email" required
+                    value={formData.email} onChange={handleChange}
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 text-white rounded-md" />
                 </div>
               </div>
 
-              {/* subject */}
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">Subject</label>
-                <input
-                  type="text"
-                  id="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 text-white rounded-md focus:ring-2 focus:ring-yellow-500"
-                  placeholder="How can we help you?"
-                  required
-                />
+                <input type="text" id="subject" required
+                  value={formData.subject} onChange={handleChange}
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 text-white rounded-md" />
               </div>
 
-              {/* message */}
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">Your Message</label>
-                <textarea
-                  id="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows="5"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 text-white rounded-md focus:ring-2 focus:ring-yellow-500"
-                  placeholder="Your message here..."
-                  required
-                ></textarea>
+                <textarea id="message" required rows="5"
+                  value={formData.message} onChange={handleChange}
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 text-white rounded-md"></textarea>
               </div>
 
-              {/* submit button */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full ${
-                  isSubmitting ? "bg-yellow-600" : "bg-yellow-500 hover:bg-yellow-600"
-                } text-black font-semibold py-3 px-6 rounded-md transition-colors`}
-              >
+              <button type="submit" disabled={isSubmitting}
+                className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-semibold py-3 px-6 rounded-md">
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>
-            </form>
 
+            </form>
           </div>
+
         </div>
       </div>
     </section>

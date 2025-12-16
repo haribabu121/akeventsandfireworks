@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Marquee = ({ items, speed = 20, className = "" }) => {
+const Marquee = ({ items, speed = 30, className = "" }) => {
   const [isPaused, setIsPaused] = useState(false);
 
   return (

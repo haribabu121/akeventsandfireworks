@@ -72,7 +72,7 @@ const Footer = () => {
             </form>
           </div>
         </div>
-        <div className="border-t border-white-100 mt-12 pt-8 text-sm text-center">
+        <div className="border-t border-white-100 mt-10 pt-8 text-sm text-center">
           <p>&copy; {new Date().getFullYear()} AK Events & Fireworks. All rights reserved.</p>
           <p className="mt-2 text-xs text-gray-500">Follow us on Instagram @akeventsandfireworks</p>
         </div>
