@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
+// import { FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
 import './ExecutiveTeam.css';
 import dpImage from "./dp.jpg";
 const teamMembers = [
@@ -16,7 +16,7 @@ const teamMembers = [
     linkedin: "#",
   },
   {
-    name: "Konapala Devi",
+    name: "Devi",
     title: "Event Manager",
     image: "https://static.vecteezy.com/system/resources/previews/034/488/032/large_2x/3d-cute-cartoon-woman-character-cartoon-businesswoman-wearing-red-suit-on-transparent-background-png.png",
     linkedin: "#",

@@ -20,6 +20,7 @@ import Fireworks from './components/services/details/Fireworks';
 import SoundLightVisual from './components/services/details/SoundLightVisual';
 import ItemSelection from './components/booking/ItemSelection';
 import ThankYou from './components/booking/ThankYou';
+// import Payment from './components/booking/Payment';
 // import AnnouncementBar from './components/common/AnnoucementBar';
 function App() {
   return (
@@ -102,13 +103,22 @@ function App() {
                 <EventsPage />
                 <Footer />
               </div>
-              
             } />
-            {/* <Route path="/select-items" element={
-              <div className="bg-gray-50">
-                <ItemSelectionPage />
+            <Route path="/select-items" element={
+              <div className="bg-gray-50 min-h-screen">
+                <ItemSelection />
                 <Footer />
-              </div> */}
+              </div>
+            } />
+            {/* <Route
+              path="/payment"
+              element={
+                <div className="bg-gray-50 min-h-screen">
+                  <Payment />
+                  <Footer />
+                </div>
+              }
+            /> */}
             <Route path="/thank-you" element={
               <div className="bg-yellow-50 min-h-screen">
                 <ThankYou />

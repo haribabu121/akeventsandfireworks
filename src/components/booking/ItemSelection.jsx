@@ -3,16 +3,15 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import emailjs from "emailjs-com";
 
 const mockProducts = [
-  { id: 1, name: 'Stage Setup', category: 'Setup' },
-  { id: 2, name: 'Sound System', category: 'Audio' },
-  { id: 3, name: 'LED Screen', category: 'Visual' },
-  { id: 4, name: 'Lighting', category: 'Visual' },
-  { id: 5, name: 'Chairs', category: 'Furniture' },
-  { id: 6, name: 'Tables', category: 'Furniture' },
-  { id: 7, name: 'Catering Service', category: 'Food' },
+  { id: 1, name: 'sparcular machines', category: 'Setup' },
+  { id: 2, name: 'fire-flame machines', category: 'Audio' },
+  { id: 3, name: 'co2-jets', category: 'Visual' },
+  { id: 4, name: 'smoke-bubble machines', category: 'Visual' },
+  { id: 5, name: 'co2-jumbo-paper-machines', category: 'Furniture' },
+  { id: 6, name: 'fan-wheel Rotator', category: 'Furniture' },
+  { id: 7, name: 'Coldfires,category:Food'},
   { id: 8, name: 'Photography', category: 'Media' },
 ];
-
 const ItemSelection = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -277,3 +276,4 @@ const ItemSelection = () => {
 };
 
 export default ItemSelection;
+

@@ -155,7 +155,7 @@ const Products = () => {
     {
       id: 1,
       name: "sparkcular-machines",
-      price: "10,000",
+      price: "7500",
       rating: 4.8,
       description: "A stunning display of colorful sparks.",
       image: "https://tse4.mm.bing.net/th/id/OIP.i95cp4GA8-t8ZDRlzmkowwHaGS"
@@ -179,7 +179,7 @@ const Products = () => {
     {
       id: 4,
       name: "smoke-bubble-machines",
-      price: "4000",
+      price: "5000",
       rating: 4.7,
       description: "Perfect for weddings and events.",
       image: "https://m.media-amazon.com/images/I/71XRUGq9bBL.jpg"
@@ -200,8 +200,8 @@ const Products = () => {
     },
     {
       id: 6,
-      name: 'co2-jet',
-      price: '8000',
+      name: 'co2 paper gun',
+      price: '10000',
       rating: 4.7,
       description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
       image: 'https://tse3.mm.bing.net/th/id/OIP.4lLFDzNx3k0jSkkIeeQlDwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
@@ -228,11 +228,249 @@ const Products = () => {
     },
     {
       id: 8,
-      name: 'smoke-gun',
-      price: '6000',
+      name: 'Dry ice smoke machine ',
+      price: '4000',
       rating: 4.7,
       description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
       image: 'https://tse1.mm.bing.net/th/id/OIP.Loh9p4wds6L7ifFmwQu2uwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+    {
+      id: 9,
+      name: 'fan-wheel Rotator',
+      price: '6000',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://i.ytimg.com/vi/80ZQrOqjoOE/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AGoA4AC8AGKAgwIABABGGUgWChXMA8=&rs=AOn4CLBW6hrjvR1xjDCYqBHPas2_ip_KVA',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 10,
+      name: 'Ballon blast Entry',
+      price: '6000',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://storage.googleapis.com/shy-pub/337348/SKU-1710_0-1731843277374.jpg',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 11,
+      name: 'stage rotating machine',
+      price: '4500',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://tse3.mm.bing.net/th/id/OIP.2rj5NKIT5nt6NLcEI0SXcQHaHa?cb=ucfimgc2&rs=1&pid=ImgDetMain&o=7&rm=3',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 12,
+      name: '360 degree silfy booth',
+      price: '12000',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://image.made-in-china.com/2f0j00EqfVLzvtuMGh/Magic-RGB-Lights-Mirror-Glass-Camera-Props-Selfie-Photo-Booth-360.jpg',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 13,
+      name: 'stadium short',
+      price: '6000',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://static.vecteezy.com/system/resources/previews/027/297/290/non_2x/football-soccer-field-stadium-at-night-and-fireworks-ai-generate-photo.jpg',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 14,
+      name: 'Pot smoke Entry',
+      price: '5000',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://i.ytimg.com/vi/gTnvo1PGKxI/hqdefault.jpg',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 15,
+      name: 'paper-blower',
+      price: '5000/10000',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://image.made-in-china.com/2f0j00iDrUgMntseoa/Easy-Hand-Control-Party-Strong-CO2-Confetti-Machine-Weding-Paper-Blaster-Blower-with-Flight-Case.jpg',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 16,
+      name: 'Heart-shape rotating',
+      price: '2500',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://img.freepik.com/premium-photo/heart-shaped-fireworks-with-heart-shape-made-fireworks_147933-4235.jpg?w=2000',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 17,
+      name: 'Dancing machine',
+      price: '1500',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://i.ytimg.com/vi/80ZQrOqjoOE/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AGoA4AC8AGKAgwIABABGGUgWChXMA8=&rs=AOn4CLBW6hrjvR1xjDCYqBHPas2_ip_KVA',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 18,
+      name: 'Entry ',
+      price: 'start from 10000',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://cdn0.weddingwire.in/article/2376/original/1280/jpg/76732-couple-entry-ideas-dream-diaries-fireworks.jpeg',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 19,
+      name: 'Birthday car Entry',
+      price: '4500',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://i.ytimg.com/vi/5KBa9YkROuw/maxresdefault.jpg',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 20,
+      name: 'food stall popkon stall',
+      price: '5000',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://img.freepik.com/premium-photo/popcorn-stand-commercial-stall-preparing-selling-popcorn-snack_1061358-255768.jpg?w=2000',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 21,
+      name: 'chocolate fountain',
+      price: '5000',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://img.freepik.com/premium-photo/chocolate-fountain-with-chocolate-sauce-dripping-down-center_922940-1036.jpg',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 22,
+      name: 'sugar candy',
+      price: '5000',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://img.freepik.com/premium-photo/watercolor-illustration-fireworks-playful-bursts-candy-cane-red-mint-green_759095-172229.jpg',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+     {
+      id: 23,
+      name: '288 skyshot',
+      price: '2500',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://i.ytimg.com/vi/ovRMf-L4E_w/hqdefault.jpg?sqp=-oaymwEoCOADEOgC8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYVCBlKEwwDw==&rs=AOn4CLCMYndEr7TXJZGEgBHbHOIJu-YhQw',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+    {
+      id: 24,
+      name: 'vintage cars',
+      price: '15000',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAzL3JtNjM0LWEtZWxlbWVudHNncm91cC10b24tMTktMDAxYy5qcGc.jpg',
+      features: [
+        'Elegant golden display',
+        'shots:5',
+        'Creates a romantic ambiance',
+        'Perfect for Entry concepts'
+      ]
+    },
+    {
+      id: 25,
+      name: 'fireworks',
+      price: '15000',
+      rating: 4.7,
+      description: 'Beautiful golden sparks that fall like rain, creating a magical and romantic atmosphere.',
+      image: 'https://cdn.pixabay.com/photo/2022/11/11/22/32/fireworks-7585928_1280.jpg',
       features: [
         'Elegant golden display',
         'shots:5',
