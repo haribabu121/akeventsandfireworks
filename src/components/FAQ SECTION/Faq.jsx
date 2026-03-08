@@ -1,115 +1,154 @@
-import React, { Component } from "react";
-import { FaPlusSquare, FaMinusSquare } from "react-icons/fa";
+import React, { useState } from 'react';
+import { FaPlus, FaMinus, FaQuestionCircle, FaStar, FaShieldAlt, FaClock, FaRocket } from 'react-icons/fa';
 
 const FeatureSection = [
   {
     question: "What services does AK Events & Fireworks offer?",
-    answer:
-      "AK Events & Fireworks provides complete event management solutions, including venue decoration, stage setups, sound and lighting, event coordination, and premium fireworks displays for weddings, corporate events, festivals, and private celebrations.",
+    answer: "AK Events & Fireworks provides complete event management solutions, including venue decoration, stage setups, sound and lighting, event coordination, and premium fireworks displays for weddings, corporate events, festivals, and private celebrations.",
+    icon: <FaRocket className="text-yellow-500" />
   },
   {
     question: "Are your fireworks safe and legal?",
-    answer:
-      "Yes. All fireworks used by AK Events & Fireworks are government-approved and handled by licensed professionals. We follow strict safety protocols and ensure full compliance with local regulations to guarantee a safe and spectacular show.",
+    answer: "Yes. All fireworks used by AK Events & Fireworks are government-approved and handled by licensed professionals. We follow strict safety protocols and ensure full compliance with local regulations to guarantee a safe and spectacular show.",
+    icon: <FaShieldAlt className="text-green-500" />
   },
   {
-    question:
-      "How far in advance should I book your services?",
-    answer:
-      "We recommend booking our services at least 4-6 weeks in advance, especially for larger events or during peak seasons. This allows us to plan and customize the event according to your preferences and ensure availability.",
+    question: "How far in advance should I book your services?",
+    answer: "We recommend booking our services at least 4-6 weeks in advance, especially for larger events or during peak seasons. This allows us to plan and customize the event according to your preferences and ensure availability.",
+    icon: <FaClock className="text-blue-500" />
   },
   {
     question: "Do you customize fireworks and event decorations?",
-    answer:
-      "Absolutely! Whether you want a themed decoration setup or a personalized fireworks show synchronized with music, our team customizes every detail according to your event style, theme, and budget.",
+    answer: "Absolutely! Whether you want a themed decoration setup or a personalized fireworks show synchronized with music, our team customizes every detail according to your event style, theme, and budget.",
+    icon: <FaStar className="text-purple-500" />
   },
   {
-    question:
-      "What is the pricing for your event and fireworks packages?",
-    answer:
-      "Pricing depends on factors such as the event type, location, decoration requirements, and the intensity/duration of the fireworks display. We offer flexible packages for all budgets. You can request a free quote, and our team will guide you with the best options.",
+    question: "What is the pricing for your event and fireworks packages?",
+    answer: "Pricing depends on factors such as event type, location, decoration requirements, and the intensity/duration of fireworks display. We offer flexible packages for all budgets. You can request a free quote, and our team will guide you with the best options.",
+    icon: <FaQuestionCircle className="text-pink-500" />
   },
 ];
 
-class FAQSection extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      openIndex: null,
-    };
-  }
+const FAQItem = ({ faq, index, isOpen, onToggle }) => {
+  return (
+    <div 
+      className="group relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden border border-gray-100"
+      style={{ animationDelay: `${index * 100}ms` }}
+    >
+      {/* Gradient border effect on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-pink-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
+      
+      <button
+        onClick={() => onToggle(index)}
+        className="w-full px-6 py-5 text-left flex items-center justify-between gap-4 relative z-10 hover:bg-gradient-to-r hover:from-yellow-50 hover:to-pink-50 transition-all duration-300"
+      >
+        <div className="flex items-center gap-4 flex-1">
+          <div className="w-12 h-12 bg-gradient-to-br from-gray-50 to-white rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
+            {faq.icon}
+          </div>
+          <span className="font-semibold text-gray-900 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-yellow-600 group-hover:to-pink-600 group-hover:bg-clip-text transition-all duration-300">
+            {faq.question}
+          </span>
+        </div>
+        
+        <div className="relative">
+          <div className={`w-10 h-10 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center text-white transition-all duration-300 transform ${isOpen ? 'rotate-45' : ''}`}>
+            {isOpen ? (
+              <FaMinus className="text-sm" />
+            ) : (
+              <FaPlus className="text-sm" />
+            )}
+          </div>
+          <div className="absolute inset-0 bg-yellow-400 rounded-full animate-ping opacity-20"></div>
+        </div>
+      </button>
 
-  toggleFAQ = (index) => {
-    this.setState((prevState) => ({
-      openIndex: prevState.openIndex === index ? null : index,
-    }));
+      {/* Answer with smooth animation */}
+      <div className={`overflow-hidden transition-all duration-500 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
+        <div className="px-6 pb-5 pl-20 bg-gradient-to-r from-gray-50 to-white text-gray-600 leading-relaxed border-t border-gray-100">
+          {faq.answer}
+        </div>
+      </div>
+      
+      {/* Shimmer effect */}
+      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none">
+        <div className="h-full w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent transform skew-x-12"></div>
+      </div>
+    </div>
+  );
+};
+
+const FAQSection = () => {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
   };
 
-  render() {
-    const { openIndex } = this.state;
-
-    return (
-      <div id="faq" className="relative flex items-center justify-between gap-12 px-[6%] py-16 bg-white overflow-hidden flex-wrap lg:flex-nowrap scroll-mt-24">
-
-        {/* Background Circles */}
-        <div className="absolute top-10 left-10 w-24 h-24 bg-sky-200 rounded-full blur-3xl opacity-40"></div>
-        <div className="absolute bottom-10 right-16 w-40 h-40 bg-blue-200 rounded-full blur-3xl opacity-40"></div>
-        <div className="absolute top-1/2 left-1/2 w-20 h-20 bg-cyan-200 rounded-full blur-3xl opacity-40"></div>
-
-        {/* Left Section */}
-        <div className="w-full lg:w-3/5 relative z-10 order-1 lg:order-none">
-          <div className="inline-block bg-yellow-400 text-white px-4 py-2 rounded-md font-semibold mb-4 shadow-md">
-            Untangle Your Queries
+  return (
+    <section id="faq" className="py-20 bg-gradient-to-br from-gray-50 via-white to-yellow-50/20 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-40 left-20 w-64 h-64 bg-yellow-400 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-40 right-20 w-80 h-80 bg-pink-400 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Enhanced Section Header */}
+        <div className="text-center mb-16">
+          <div className="group inline-block">
+            <h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-yellow-500 group-hover:to-pink-500 group-hover:bg-clip-text transition-all duration-500">
+              Frequently Asked Questions
+            </h2>
+            <div className="relative">
+              <div className="w-32 h-2 mx-auto rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 transform origin-left transition-all duration-700 group-hover:scale-x-150"></div>
+              <div className="absolute inset-0 w-32 h-2 mx-auto rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 blur-md opacity-50"></div>
+            </div>
           </div>
-
-          <h2 className="text-3xl font-bold text-gray-900 mb-3">
-            Frequently Asked Questions
-          </h2>
-
-          <p className="text-gray-600 leading-relaxed mb-6 max-w-xl">
-            Find answers to all your questions, learn about our software, its
-            working and other related information instantly.
+          <p className="mt-8 text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            Find answers to common questions about our services and learn how we can make your event unforgettable
           </p>
+        </div>
 
-          <div className="flex flex-col gap-4">
+        {/* FAQ Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="space-y-6">
             {FeatureSection.map((faq, index) => (
-              <div
-                key={index}
-                className="border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md hover:yellow-200 transition"
-              >
-                <button
-                  onClick={() => this.toggleFAQ(index)}
-                  className="w-full px-5 py-4 text-left font-medium text-gray-900 hover:text-yellow-600 flex items-center gap-3"
-                >
-                  {openIndex === index ? (
-                    <FaMinusSquare className="text-yellow-500 text-xl" />
-                  ) : (
-                    <FaPlusSquare className="text-yellow-500 text-xl" />
-                  )}
-                  <span>{faq.question}</span>
-                </button>
-
-                {openIndex === index && (
-                  <div className="px-5 pb-4 pl-12 bg-gray-50 text-gray-600 text-sm leading-relaxed border-t border-gray-200">
-                    {faq.answer}
-                  </div>
-                )}
+              <div key={index} className="animate-slide-up" style={{ animationDelay: `${index * 100}ms` }}>
+                <FAQItem 
+                  faq={faq} 
+                  index={index} 
+                  isOpen={openIndex === index}
+                  onToggle={toggleFAQ}
+                />
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Right Section */}
-        <div className="w-full lg:w-2/5 flex justify-center relative z-10 order-0 lg:order-none mb-10 lg:mb-0">
-          <img
-            src="https://empmonitor.com/wp-content/uploads/2024/06/Frame-2062.webp"
-            alt="EmpMonitor illustration"
-            className="w-[350px] lg:w-[450px] rounded-xl object-cover transition-transform hover:scale-105"
-          />
+          
+          {/* Right side illustration */}
+          <div className="flex items-center justify-center">
+            <div className="relative">
+              <div className="absolute -inset-4 bg-gradient-to-r from-yellow-400/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl"></div>
+              <img
+                src="https://empmonitor.com/wp-content/uploads/2024/06/Frame-2062.webp"
+                alt="FAQ illustration"
+                className="relative w-full max-w-md rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+              />
+              
+              {/* Floating badges */}
+              <div className="absolute -top-4 -right-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg animate-pulse">
+                Got Questions?
+              </div>
+              
+              <div className="absolute -bottom-4 -left-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg animate-bounce">
+                We're Here!
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    );
-  }
-}
+    </section>
+  );
+};
 
 export default FAQSection;

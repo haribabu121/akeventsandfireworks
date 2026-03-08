@@ -381,3 +381,4 @@ const BookingForm = ({ onClose }) => {
 };
 
 export default BookingForm;
+

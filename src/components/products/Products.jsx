@@ -481,112 +481,217 @@ const Products = () => {
   ];
 
   return (
-    <section id="products" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-10">
-          <div className="group">
-            <h1 className="text-4xl font-bold text-center mb-4 group-hover:text-yellow-500 transition-colors duration-300">Our Products</h1>
-            <div className="group relative">
-              <div className="w-24 h-1.5 mx-auto transform origin-left transition-all duration-500 group-hover:scale-x-125 bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 bg-size-200 group-hover:bg-pos-0 bg-pos-100"></div>
+    <section id="products" className="py-20 bg-gradient-to-br from-gray-50 via-white to-yellow-50/20 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-40 left-20 w-64 h-64 bg-yellow-400 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-40 right-20 w-80 h-80 bg-pink-400 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+          <div className="group inline-block">
+            <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-yellow-500 group-hover:to-pink-500 group-hover:bg-clip-text transition-all duration-500">
+              Our Products
+            </h1>
+            <div className="relative">
+              <div className="w-32 h-2 mx-auto rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 transform origin-left transition-all duration-700 group-hover:scale-x-150"></div>
+              <div className="absolute inset-0 w-32 h-2 mx-auto rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-500 blur-md opacity-50"></div>
             </div>
           </div>
+          <p className="mt-8 text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Discover our premium range of event products designed to create unforgettable moments
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-          {products.map((p) => (
-            <div key={p.id} className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl">
-              <img src={p.image} className="w-full h-40 object-cover rounded" />
-
-              <h3 className="text-xl font-bold mt-3">
-                {p.name.replace(/-/g, " ")}
-              </h3>
-
-              <p className="text-gray-600 text-sm mt-1">{p.description}</p>
-
-              <div className="flex justify-between items-center mt-3">
-                <span className="text-yellow-600 text-xl font-bold">{p.price}</span>
-                <span className="flex items-center">
-                  <FaStar className="text-yellow-500" /> {p.rating}
-                </span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {products.map((p, index) => (
+            <div 
+              key={p.id} 
+              className="group relative bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-700 hover:shadow-2xl hover:-translate-y-3 hover:scale-105"
+              style={{ animationDelay: `${index * 50}ms` }}
+            >
+              {/* Gradient border effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-pink-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
+              
+              {/* Image container */}
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={p.image} 
+                  alt={p.name.replace(/-/g, " ")}
+                  className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Floating price badge */}
+                <div className="absolute top-4 right-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg transform translate-x-20 group-hover:translate-x-0 transition-transform duration-500">
+                  ₹{p.price}
+                </div>
               </div>
 
-              <button
-                onClick={() => handleBookNow(p)}
-                className="w-full mt-4 bg-yellow-500 text-white py-2 rounded-md flex items-center justify-center gap-2 hover:bg-yellow-600"
-              >
-                Book Now <FaArrowRight />
-              </button>
+              {/* Content */}
+              <div className="relative p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-yellow-600 group-hover:to-pink-600 group-hover:bg-clip-text transition-all duration-500 line-clamp-2">
+                  {p.name.replace(/-/g, " ")}
+                </h3>
+
+                <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                  {p.description}
+                </p>
+
+                {/* Rating */}
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="flex items-center">
+                    {[...Array(5)].map((_, i) => (
+                      <FaStar 
+                        key={i} 
+                        className={`text-sm ${i < Math.floor(p.rating) ? 'text-yellow-400' : 'text-gray-300'}`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">{p.rating}</span>
+                </div>
+
+                {/* Features */}
+                {p.features && (
+                  <div className="mb-4">
+                    <div className="flex flex-wrap gap-1">
+                      {p.features.slice(0, 2).map((feature, idx) => (
+                        <span 
+                          key={idx}
+                          className="inline-block bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                      {p.features.length > 2 && (
+                        <span className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
+                          +{p.features.length - 2} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Book Now Button */}
+                <button
+                  onClick={() => handleBookNow(p)}
+                  className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-500 transform hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/30 flex items-center justify-center gap-2 btn-hover-lift"
+                >
+                  <span>Book Now</span>
+                  <FaArrowRight className="transform group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
+              </div>
+              
+              {/* Hover border effect */}
+              <div className="absolute inset-0 border-2 border-transparent group-hover:border-yellow-400/50 rounded-2xl pointer-events-none transition-all duration-500"></div>
+              
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none">
+                <div className="h-full w-1/3 bg-gradient-to-r from-transparent via-white/20 to-transparent transform skew-x-12"></div>
+              </div>
             </div>
           ))}
-
         </div>
       </div>
 
-      {/* FORM POPUP */}
+      {/* Enhanced FORM POPUP */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-          <div className="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
-            <div className="flex justify-between items-center">
-              <h3 className="text-xl font-bold">Enter Details</h3>
-              <FaTimes className="cursor-pointer" onClick={() => setShowForm(false)} />
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+          <div className="bg-white w-full max-w-md p-8 rounded-2xl shadow-2xl transform animate-scale-up border border-gray-100">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-bold text-gray-900">Enter Details</h3>
+              <button 
+                onClick={() => setShowForm(false)}
+                className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors duration-300"
+              >
+                <FaTimes className="text-gray-600" />
+              </button>
             </div>
 
-            <form onSubmit={handleFormSubmit} className="mt-4 space-y-3">
-              <input
-                type="text"
-                required
-                placeholder="Your Name"
-                className="w-full border px-3 py-2 rounded"
-                onChange={e => setFormData({ ...formData, name: e.target.value })}
-              />
-              <input
-                type="tel"
-                required
-                placeholder="Phone Number (10 digits)"
-                className="w-full border px-3 py-2 rounded"
-                pattern="[0-9]{10}"
-                onChange={e => setFormData({ ...formData, phone: e.target.value })}
-              />
-              <input
-                type="text"
-                required
-                placeholder="Occasion"
-                className="w-full border px-3 py-2 rounded"
-                onChange={e => setFormData({ ...formData, occasion: e.target.value })}
-              />
+            <form onSubmit={handleFormSubmit} className="space-y-5">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Enter your full name"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-300"
+                  onChange={e => setFormData({ ...formData, name: e.target.value })}
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                <input
+                  type="tel"
+                  required
+                  placeholder="10-digit phone number"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-300"
+                  pattern="[0-9]{10}"
+                  onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Occasion</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Wedding, Birthday, Corporate Event..."
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-300"
+                  onChange={e => setFormData({ ...formData, occasion: e.target.value })}
+                />
+              </div>
 
-              <button className="w-full bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600">
-                Submit
+              <button 
+                type="submit"
+                className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-500 transform hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/30 btn-hover-lift"
+              >
+                Submit Details
               </button>
             </form>
           </div>
         </div>
       )}
 
-      {/* CALENDAR POPUP */}
+      {/* Enhanced CALENDAR POPUP */}
       {showCalendar && (
-        <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50 p-4">
-          <div className="bg-white w-full max-w-4xl p-4 rounded-lg shadow-lg">
-            <div className="flex justify-between mb-2">
-              <h3 className="text-xl font-bold">Select Date</h3>
-              <FaTimes className="cursor-pointer" onClick={() => setShowCalendar(false)} />
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+          <div className="bg-white w-full max-w-5xl p-6 rounded-2xl shadow-2xl transform animate-scale-up border border-gray-100">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-bold text-gray-900">Select Booking Date</h3>
+              <button 
+                onClick={() => setShowCalendar(false)}
+                className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors duration-300"
+              >
+                <FaTimes className="text-gray-600" />
+              </button>
             </div>
 
-            <Calendar
-              date={currentDate}
-              onNavigate={(date) => setCurrentDate(date)}
-              localizer={localizer}
-              events={events}
-              selectable
-              startAccessor="start"
-              endAccessor="end"
-              onSelectSlot={handleSelectSlot}
-              components={{ toolbar: CustomToolbar }}
-              defaultView={Views.MONTH}
-              views={[Views.MONTH]}
-              style={{ minHeight: "300px", maxHeight: "80vh" }}
-            />
+            <div className="bg-gray-50 rounded-xl p-4">
+              <Calendar
+                date={currentDate}
+                onNavigate={(date) => setCurrentDate(date)}
+                localizer={localizer}
+                events={events}
+                selectable
+                startAccessor="start"
+                endAccessor="end"
+                onSelectSlot={handleSelectSlot}
+                components={{ toolbar: CustomToolbar }}
+                defaultView={Views.MONTH}
+                views={[Views.MONTH]}
+                style={{ minHeight: "400px", maxHeight: "70vh" }}
+                className="rounded-lg"
+              />
+            </div>
+            
+            <div className="mt-4 p-4 bg-yellow-50 rounded-xl border border-yellow-200">
+              <p className="text-sm text-yellow-800">
+                <strong>Note:</strong> Click on any available date to book your {selectedProduct?.name?.replace(/-/g, " ")}.
+              </p>
+            </div>
           </div>
         </div>
       )}
